@@ -775,20 +775,20 @@ Checklist meaning:
 
 ### Milestone 1 - Project setup
 
-- [ ] Initialize the Git repository and create the root `.gitignore`
-- [ ] Create the root `README.md`
-- [ ] Create the `frontend/` React 19.3 project with Vite and JavaScript
-- [ ] Create the basic frontend folder structure
-- [ ] Install React Router and Axios
-- [ ] Add Montserrat and Inter fonts
-- [ ] Create global CSS variables and reset styles
-- [ ] Create the `backend/` Spring Boot 4.1.1 project with Java 25 and Maven
-- [ ] Create the layered backend package structure
+- [x] Initialize the Git repository and create the root `.gitignore`
+- [x] Create the root `README.md`
+- [x] Create the `frontend/` React 19.3 project with Vite and JavaScript
+- [x] Create the basic frontend folder structure
+- [x] Install React Router and Axios
+- [x] Add Montserrat and Inter fonts
+- [x] Create global CSS variables and reset styles
+- [x] Create the `backend/` Spring Boot 4.1.1 project with Java 25 and Maven
+- [x] Create the layered backend package structure
 - [ ] Create the MySQL database
-- [ ] Configure the backend database connection without committing secrets
-- [ ] Create and manually call a backend health endpoint
+- [x] Configure the backend database connection without committing secrets
+- [x] Create and manually call a backend health endpoint
 - [ ] Call the health endpoint from React
-- [ ] Add frontend and backend run instructions to the README
+- [x] Add frontend and backend run instructions to the README
 - [ ] Review changes and commit the completed setup milestone
 
 ### Milestone 2 - Registration and login
