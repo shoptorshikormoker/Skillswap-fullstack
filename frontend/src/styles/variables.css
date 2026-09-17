@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@600;700;800&display=swap');
+
+:root {
+  --color-primary: #1769e0;
+  --color-primary-dark: #1153b5;
+  --color-primary-light: #eaf4ff;
+  --color-accent: #e64942;
+  --color-accent-light: #fff0ef;
+  --color-text: #172033;
+  --color-text-muted: #667085;
+  --color-background: #f8fafc;
+  --color-surface: #ffffff;
+  --color-border: #e8e8e8;
+  --color-success: #4d9b55;
+  --color-success-light: #edf8e8;
+  --color-warning: #d9822b;
+  --color-error: #cf423b;
+  --font-heading: 'Montserrat', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --shadow-sm: 0 4px 14px rgba(23, 32, 51, 0.08);
+  --shadow-md: 0 12px 30px rgba(23, 32, 51, 0.12);
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --container-width: 1200px;
+}
