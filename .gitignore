@@ -1,0 +1,23 @@
+# IDE files
+.idea/
+.vscode/
+*.iml
+
+# Environment and secret files
+.env
+.env.*
+!.env.example
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/npm-debug.log*
+
+# Backend
+backend/target/
+backend/.mvn/timing.properties
+
+# Operating system files
+.DS_Store
+Thumbs.db
