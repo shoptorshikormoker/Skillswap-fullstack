@@ -795,20 +795,20 @@ Checklist meaning:
 
 ### Milestone 2 - Registration and login
 
-- [ ] Create the user entity and role enum
-- [ ] Create the user repository
-- [ ] Create registration request and response DTOs
-- [ ] Create the registration service and controller endpoint
-- [ ] Hash passwords securely
-- [ ] Reject duplicate email registration
-- [ ] Create the login DTOs, service, and endpoint
-- [ ] Add JWT generation and validation
-- [ ] Configure Spring Security and protected endpoints
-- [ ] Create the frontend authentication context and Axios configuration
-- [ ] Build and style the registration page
-- [ ] Build and style the login page
-- [ ] Add protected frontend routes and logout
-- [ ] Manually verify valid and invalid authentication cases
+- [x] Create the user entity and role enum
+- [x] Create the user repository
+- [x] Create registration request and response DTOs
+- [x] Create the registration service and controller endpoint
+- [x] Hash passwords securely
+- [x] Reject duplicate email registration
+- [x] Create the login DTOs, service, and endpoint
+- [x] Add JWT generation and validation
+- [x] Configure Spring Security and protected endpoints
+- [x] Create the frontend authentication context and Axios configuration
+- [x] Build and style the registration page
+- [x] Build and style the login page
+- [x] Add protected frontend routes and logout
+- [x] Manually verify valid and invalid authentication cases
 - [ ] Update the README and commit the authentication milestone
 
 ### Milestone 3 - Profile management

@@ -96,6 +96,15 @@ a:focus-visible {
   animation: fade-up 400ms ease-out both;
 }
 
+.page-loading {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  color: var(--color-primary-dark);
+  font-family: var(--font-heading);
+  font-weight: 700;
+}
+
 @keyframes fade-up {
   from {
     opacity: 0;

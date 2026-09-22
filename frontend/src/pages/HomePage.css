@@ -20,7 +20,6 @@
   color: var(--color-primary);
 }
 
-.milestone-label,
 .eyebrow {
   color: var(--color-primary-dark);
   font-family: var(--font-heading);
@@ -30,10 +29,20 @@
   text-transform: uppercase;
 }
 
-.milestone-label {
-  padding: 6px 12px;
-  border-radius: 999px;
-  background: var(--color-primary-light);
+.navbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.navbar__login {
+  color: var(--color-primary-dark);
+  font-weight: 700;
+}
+
+.navbar__register {
+  min-height: 42px;
+  padding: 7px 16px;
 }
 
 .hero {
@@ -246,8 +255,14 @@
     min-height: 64px;
   }
 
-  .milestone-label {
-    font-size: 11px;
+  .navbar__login {
+    display: none;
+  }
+
+  .navbar__register {
+    min-height: 38px;
+    padding: 5px 11px;
+    font-size: 13px;
   }
 
   .hero {

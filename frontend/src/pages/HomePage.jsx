@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import StatusCard from '../components/StatusCard'
 import { getHealth } from '../services/healthService'
 import './HomePage.css'
@@ -28,10 +29,17 @@ function HomePage() {
   return (
     <main className="home-page">
       <nav className="navbar container" aria-label="Main navigation">
-        <a className="brand" href="/" aria-label="SkillSwap home">
+        <Link className="brand" to="/" aria-label="SkillSwap home">
           Skill<span>Swap</span>
-        </a>
-        <span className="milestone-label">Milestone 1</span>
+        </Link>
+        <div className="navbar__actions">
+          <Link className="navbar__login" to="/login">
+            Log in
+          </Link>
+          <Link className="button button--primary navbar__register" to="/register">
+            Get started
+          </Link>
+        </div>
       </nav>
       <section className="hero container">
         <div className="hero__content fade-up">
@@ -42,9 +50,9 @@ function HomePage() {
             clear step at a time.
           </p>
           <div className="hero__actions">
-            <a className="button button--primary" href="#progress">
-              View progress
-            </a>
+            <Link className="button button--primary" to="/register">
+              Start swapping skills
+            </Link>
             <a className="button button--secondary" href="#how-it-works">
               How it works
             </a>

@@ -41,12 +41,29 @@ The local MySQL account in this environment requires a password. Keep that passw
 
 ## 2. Run the backend
 
-Open PowerShell in the `backend` folder and set the database values for the current terminal:
+Create `backend/.env` from `backend/.env.example`. Add your database values and a private JWT secret:
+
+```properties
+DB_URL=jdbc:mysql://localhost:3306/skillswap
+DB_USERNAME=root
+DB_PASSWORD=your_mysql_password
+JWT_SECRET=your_base64_secret
+```
+
+Generate a suitable JWT secret in PowerShell:
 
 ```powershell
-$env:DB_URL = "jdbc:mysql://localhost:3306/skillswap"
-$env:DB_USERNAME = "root"
-$env:DB_PASSWORD = "your_mysql_password"
+$bytes = New-Object byte[] 32
+$generator = [Security.Cryptography.RandomNumberGenerator]::Create()
+$generator.GetBytes($bytes)
+[Convert]::ToBase64String($bytes)
+```
+
+Copy only the generated Base64 result into `JWT_SECRET`, then close the generator with `$generator.Dispose()`.
+
+Start the backend from the `backend` folder:
+
+```powershell
 ./mvnw.cmd spring-boot:run
 ```
 
@@ -65,7 +82,7 @@ Expected response:
 }
 ```
 
-The available configuration names are documented in `backend/.env.example`. Spring Boot reads environment variables from the terminal; it does not automatically load that example file.
+The available configuration names are documented in `backend/.env.example`. The real `.env` file is ignored by Git and is loaded automatically when the backend starts from the `backend` folder.
 
 ## 3. Run the frontend
 
@@ -102,4 +119,24 @@ npm run build
 
 ## Current progress
 
-Milestone 1 is in progress. The frontend and backend compile, and the health API has been manually verified. MySQL database creation and the full browser connection still require valid local MySQL credentials.
+Milestone 1 is complete. Milestone 2 authentication is implemented with registration, login, BCrypt password hashing, JWT authorization, protected routes, logout, validation, and responsive authentication pages.
+
+## Authentication pages and API
+
+Frontend pages:
+
+```text
+http://localhost:5173/register
+http://localhost:5173/login
+http://localhost:5173/dashboard
+```
+
+Backend endpoints:
+
+```text
+POST /api/auth/register
+POST /api/auth/login
+GET  /api/auth/me
+```
+
+The dashboard route and `/api/auth/me` require authentication. Logging out removes the JWT from the browser.
