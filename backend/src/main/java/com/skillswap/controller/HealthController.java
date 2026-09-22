@@ -12,9 +12,6 @@ public class HealthController {
 
     @GetMapping
     public Map<String, String> health() {
-        return Map.of(
-                "status", "UP",
-                "message", "SkillSwap API is running."
-        );
+        return Map.of("status", "UP", "message", "SkillSwap API is running.");
     }
 }

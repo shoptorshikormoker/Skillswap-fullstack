@@ -472,7 +472,9 @@ Animations should explain interaction and make the interface feel polished. They
 
 ```css
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     scroll-behavior: auto !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
@@ -576,19 +578,19 @@ docs: add authentication setup notes
 
 ### 12.4 Milestone commit map
 
-| Milestone | Branch | Example important commits |
-|---|---|---|
-| Setup | `chore/project-setup` | initialize frontend; initialize backend; connect MySQL; connect frontend API |
+| Milestone      | Branch                   | Example important commits                                                         |
+| -------------- | ------------------------ | --------------------------------------------------------------------------------- |
+| Setup          | `chore/project-setup`    | initialize frontend; initialize backend; connect MySQL; connect frontend API      |
 | Authentication | `feature/authentication` | add user model; add registration; add JWT login; build auth pages; protect routes |
-| Profiles | `feature/profiles` | add profile API; build edit page; build public profile; style profile UI |
-| Skills | `feature/skills` | add category and skill models; add user skills; build skill pages |
-| Search | `feature/search` | add search API; build filters; build result cards |
-| Exchanges | `feature/exchanges` | add request workflow; build request pages; add notifications |
-| Sessions | `feature/sessions` | add scheduling API; build session pages; add status actions |
-| Video meetings | `feature/video-meetings` | create secure room names; embed Jitsi; restrict meeting access; add call UI |
-| Reviews | `feature/reviews` | add review rules; build review form; show profile ratings |
-| Chat | `feature/chat` | add message API; build conversation UI; restrict participants |
-| Admin/final | `feature/admin-polish` | add admin pages; improve responsive UI; finish documentation |
+| Profiles       | `feature/profiles`       | add profile API; build edit page; build public profile; style profile UI          |
+| Skills         | `feature/skills`         | add category and skill models; add user skills; build skill pages                 |
+| Search         | `feature/search`         | add search API; build filters; build result cards                                 |
+| Exchanges      | `feature/exchanges`      | add request workflow; build request pages; add notifications                      |
+| Sessions       | `feature/sessions`       | add scheduling API; build session pages; add status actions                       |
+| Video meetings | `feature/video-meetings` | create secure room names; embed Jitsi; restrict meeting access; add call UI       |
+| Reviews        | `feature/reviews`        | add review rules; build review form; show profile ratings                         |
+| Chat           | `feature/chat`           | add message API; build conversation UI; restrict participants                     |
+| Admin/final    | `feature/admin-polish`   | add admin pages; improve responsive UI; finish documentation                      |
 
 ## 13. Beginner-Friendly Development Milestones
 
@@ -784,12 +786,12 @@ Checklist meaning:
 - [x] Create global CSS variables and reset styles
 - [x] Create the `backend/` Spring Boot 4.1.1 project with Java 25 and Maven
 - [x] Create the layered backend package structure
-- [ ] Create the MySQL database
+- [x] Create the MySQL database
 - [x] Configure the backend database connection without committing secrets
 - [x] Create and manually call a backend health endpoint
-- [ ] Call the health endpoint from React
+- [x] Call the health endpoint from React
 - [x] Add frontend and backend run instructions to the README
-- [ ] Review changes and commit the completed setup milestone
+- [x] Review changes and commit the completed setup milestone
 
 ### Milestone 2 - Registration and login
 

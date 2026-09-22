@@ -87,6 +87,8 @@ To use another API address, copy `frontend/.env.example` to `frontend/.env` and 
 
 ```powershell
 npm run dev
+npm run format
+npm run format:check
 npm run lint
 npm run build
 ```
