@@ -1,10 +1,5 @@
 package com.skillswap.service;
 
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.skillswap.dto.AuthResponse;
 import com.skillswap.dto.LoginRequest;
 import com.skillswap.dto.RegisterRequest;
@@ -14,6 +9,10 @@ import com.skillswap.enums.Role;
 import com.skillswap.exception.BadRequestException;
 import com.skillswap.repository.UserRepository;
 import com.skillswap.security.JwtService;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class AuthService {
@@ -22,10 +21,7 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
 
-    public AuthService(
-            UserRepository userRepository,
-            PasswordEncoder passwordEncoder,
-            JwtService jwtService) {
+    public AuthService(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtService jwtService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtService = jwtService;
@@ -51,7 +47,8 @@ public class AuthService {
 
     @Transactional(readOnly = true)
     public AuthResponse login(LoginRequest request) {
-        User user = userRepository.findByEmailIgnoreCase(normalizeEmail(request.email()))
+        User user = userRepository
+                .findByEmailIgnoreCase(normalizeEmail(request.email()))
                 .orElseThrow(() -> new BadCredentialsException("Invalid credentials"));
 
         if (!user.isEnabled() || !passwordEncoder.matches(request.password(), user.getPassword())) {
@@ -63,7 +60,8 @@ public class AuthService {
 
     @Transactional(readOnly = true)
     public UserResponse getCurrentUser(String email) {
-        User user = userRepository.findByEmailIgnoreCase(email)
+        User user = userRepository
+                .findByEmailIgnoreCase(email)
                 .orElseThrow(() -> new BadCredentialsException("Invalid user"));
         return UserResponse.from(user);
     }

@@ -114,6 +114,8 @@ npm run build
 
 ```powershell
 ./mvnw.cmd spring-boot:run
+./mvnw.cmd spotless:apply
+./mvnw.cmd spotless:check
 ./mvnw.cmd -DskipTests package
 ```
 

@@ -77,6 +77,48 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>com.diffplug.spotless</groupId>
+				<artifactId>spotless-maven-plugin</artifactId>
+				<version>3.10.2</version>
+				<configuration>
+					<formats>
+						<format>
+							<includes>
+								<include>pom.xml</include>
+								<include>src/**/*.properties</include>
+								<include>src/**/*.sql</include>
+							</includes>
+							<trimTrailingWhitespace/>
+							<endWithNewline/>
+						</format>
+					</formats>
+					<java>
+						<palantirJavaFormat>
+							<version>2.98.0</version>
+						</palantirJavaFormat>
+						<removeUnusedImports/>
+						<formatAnnotations/>
+						<trimTrailingWhitespace/>
+						<endWithNewline/>
+						<replaceRegex>
+							<name>Put annotated method parameters on separate lines</name>
+							<searchRegex>(?m)^(\h*)([^\r\n]*\()(@\w+(?:\([^\r\n]*?\))?)\h+(?=@)</searchRegex>
+							<replacement>$1$2&#10;$1$1$3&#10;$1$1</replacement>
+						</replaceRegex>
+						<replaceRegex>
+							<name>Put consecutive record annotations on separate lines</name>
+							<searchRegex>(?m)^(\h*)(@\w+(?:\([^\r\n]*?\))?)\h+(?=@)</searchRegex>
+							<replacement>$1$2&#10;$1</replacement>
+						</replaceRegex>
+						<replaceRegex>
+							<name>Put parameter types below annotations</name>
+							<searchRegex>(?m)^(\h*)(@\w+(?:\([^\r\n]*\))?)\h+((?:[\w.?&lt;>\[\]]+\h+)+\w+[,)])(\h*\{\}?)?\h*$</searchRegex>
+							<replacement>$1$2&#10;$1$3$4</replacement>
+						</replaceRegex>
+					</java>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 

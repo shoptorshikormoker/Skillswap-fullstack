@@ -1,12 +1,11 @@
 package com.skillswap.security;
 
+import com.skillswap.entity.User;
+import com.skillswap.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import com.skillswap.entity.User;
-import com.skillswap.repository.UserRepository;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
@@ -19,11 +18,11 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userRepository.findByEmailIgnoreCase(email)
+        User user = userRepository
+                .findByEmailIgnoreCase(email)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
-        return org.springframework.security.core.userdetails.User
-                .withUsername(user.getEmail())
+        return org.springframework.security.core.userdetails.User.withUsername(user.getEmail())
                 .password(user.getPassword())
                 .roles(user.getRole().name())
                 .disabled(!user.isEnabled())
