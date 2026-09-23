@@ -813,15 +813,15 @@ Checklist meaning:
 
 ### Milestone 3 - Profile management
 
-- [ ] Create the profile entity and user relationship
-- [ ] Create profile DTOs, repository, service, and controller
-- [ ] Protect profile update operations by ownership
-- [ ] Build and style the edit-profile page
-- [ ] Build and style the public-profile page
-- [ ] Add profile loading, empty, success, and error states
-- [ ] Check profile pages on phone and desktop widths
-- [ ] Manually verify profile CRUD and authorization
-- [ ] Update the README and commit the profile milestone
+- [x] Create the profile entity and user relationship
+- [x] Create profile DTOs, repository, service, and controller
+- [x] Protect profile update operations by ownership
+- [x] Build and style the edit-profile page
+- [x] Build and style the public-profile page
+- [x] Add profile loading, empty, success, and error states
+- [x] Check profile pages on phone and desktop widths
+- [x] Manually verify profile CRUD and authorization
+- [x] Update the README and commit the profile milestone
 
 ### Milestone 4 - Skills and categories
 

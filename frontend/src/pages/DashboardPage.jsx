@@ -18,7 +18,15 @@ function DashboardPage() {
       <section className="dashboard-welcome container fade-up">
         <p className="eyebrow">Your dashboard</p>
         <h1>Welcome, {user.name}!</h1>
-        <p>Your account is ready. Profile and skill management are coming in the next milestone.</p>
+        <p>Complete your profile so future skill partners can learn more about you.</p>
+        <div className="dashboard-actions">
+          <Link className="button button--primary" to="/profile/edit">
+            Edit profile
+          </Link>
+          <Link className="button button--secondary" to={`/profiles/${user.id}`}>
+            View public profile
+          </Link>
+        </div>
         <div className="account-card">
           <div>
             <span>Name</span>

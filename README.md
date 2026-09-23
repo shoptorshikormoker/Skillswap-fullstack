@@ -121,7 +121,7 @@ npm run build
 
 ## Current progress
 
-Milestones 1 and 2 are complete and manually verified. Authentication includes registration, login, BCrypt password hashing, JWT authorization, protected routes, logout, validation, and responsive authentication pages.
+Milestones 1, 2, and 3 are complete and manually verified. Profile management includes private editing, public profile pages, ownership protection, validation, and responsive layouts for phone and desktop widths.
 
 ## Authentication pages and API
 
@@ -142,3 +142,22 @@ GET  /api/auth/me
 ```
 
 The dashboard route and `/api/auth/me` require authentication. Logging out removes the JWT from the browser.
+
+## Profile pages and API
+
+Frontend pages:
+
+```text
+http://localhost:5173/profile/edit
+http://localhost:5173/profiles/{userId}
+```
+
+Backend endpoints:
+
+```text
+GET /api/profiles/me
+PUT /api/profiles/me
+GET /api/profiles/{userId}
+```
+
+The edit page and `/api/profiles/me` endpoints require authentication. Profile updates always use the authenticated user, so one user cannot update another user's profile. Public profile responses do not include email addresses or passwords.

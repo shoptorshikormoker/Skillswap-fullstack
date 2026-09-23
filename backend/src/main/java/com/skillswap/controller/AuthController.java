@@ -6,9 +6,7 @@ import com.skillswap.dto.RegisterRequest;
 import com.skillswap.dto.UserResponse;
 import com.skillswap.service.AuthService;
 import jakarta.validation.Valid;
-
 import java.security.Principal;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,13 +26,19 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<AuthResponse> register(@Valid @RequestBody RegisterRequest request) {
+    public ResponseEntity<AuthResponse> register(
+        @Valid
+        @RequestBody
+        RegisterRequest request) {
         AuthResponse response = authService.register(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @PostMapping("/login")
-    public AuthResponse login(@Valid @RequestBody LoginRequest request) {
+    public AuthResponse login(
+        @Valid
+        @RequestBody
+        LoginRequest request) {
         return authService.login(request);
     }
 

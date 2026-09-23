@@ -3,6 +3,7 @@ package com.skillswap.config;
 import com.skillswap.security.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -30,6 +31,8 @@ public class SecurityConfig {
                         response.sendError(HttpStatus.UNAUTHORIZED.value(), "Unauthorized")))
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/api/health", "/api/auth/register", "/api/auth/login")
+                        .permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/profiles/{userId:\\d+}")
                         .permitAll()
                         .anyRequest()
                         .authenticated())
