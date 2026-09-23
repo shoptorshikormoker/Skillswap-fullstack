@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { useAuth } from '../context/authContext'
 import './DashboardPage.css'
 
@@ -7,9 +8,9 @@ function DashboardPage() {
   return (
     <main className="dashboard-page">
       <nav className="navbar container" aria-label="Dashboard navigation">
-        <a className="brand" href="/">
+        <Link className="brand" to="/">
           Skill<span>Swap</span>
-        </a>
+        </Link>
         <button className="button button--secondary" type="button" onClick={logout}>
           Log out
         </button>

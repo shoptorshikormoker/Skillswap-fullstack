@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import StatusCard from '../components/StatusCard'
+import { useAuth } from '../context/authContext'
 import { getHealth } from '../services/healthService'
 import './HomePage.css'
 
@@ -11,6 +12,7 @@ const steps = [
 ]
 
 function HomePage() {
+  const { user } = useAuth()
   const [health, setHealth] = useState({
     status: 'loading',
     message: 'Checking the Spring Boot API...',
@@ -33,12 +35,20 @@ function HomePage() {
           Skill<span>Swap</span>
         </Link>
         <div className="navbar__actions">
-          <Link className="navbar__login" to="/login">
-            Log in
-          </Link>
-          <Link className="button button--primary navbar__register" to="/register">
-            Get started
-          </Link>
+          {user ? (
+            <Link className="button button--primary" to="/dashboard">
+              Dashboard
+            </Link>
+          ) : (
+            <>
+              <Link className="navbar__login" to="/login">
+                Log in
+              </Link>
+              <Link className="button button--primary navbar__register" to="/register">
+                Get started
+              </Link>
+            </>
+          )}
         </div>
       </nav>
       <section className="hero container">

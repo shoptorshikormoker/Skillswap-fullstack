@@ -1,12 +1,11 @@
 import { useState } from 'react'
-import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/authContext'
 import './AuthPages.css'
 
 function LoginPage() {
   const { user, login } = useAuth()
   const navigate = useNavigate()
-  const location = useLocation()
   const [formData, setFormData] = useState({ email: '', password: '' })
   const [error, setError] = useState('')
   const [submitting, setSubmitting] = useState(false)
@@ -26,7 +25,7 @@ function LoginPage() {
 
     try {
       await login(formData)
-      navigate(location.state?.from?.pathname || '/dashboard', { replace: true })
+      navigate('/dashboard', { replace: true })
     } catch (requestError) {
       setError(requestError.response?.data?.message || 'Unable to log in. Please try again.')
     } finally {

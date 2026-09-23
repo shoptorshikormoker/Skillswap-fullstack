@@ -121,7 +121,7 @@ npm run build
 
 ## Current progress
 
-Milestone 1 is complete. Milestone 2 authentication is implemented with registration, login, BCrypt password hashing, JWT authorization, protected routes, logout, validation, and responsive authentication pages.
+Milestones 1 and 2 are complete and manually verified. Authentication includes registration, login, BCrypt password hashing, JWT authorization, protected routes, logout, validation, and responsive authentication pages.
 
 ## Authentication pages and API
 

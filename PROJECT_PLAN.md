@@ -809,7 +809,7 @@ Checklist meaning:
 - [x] Build and style the login page
 - [x] Add protected frontend routes and logout
 - [x] Manually verify valid and invalid authentication cases
-- [ ] Update the README and commit the authentication milestone
+- [x] Update the README and commit the authentication milestone
 
 ### Milestone 3 - Profile management
 
