@@ -223,6 +223,10 @@
   justify-items: center;
   padding: 24px;
   text-align: center;
+  background:
+    radial-gradient(circle at 50% 45%, var(--color-primary-light), transparent 20rem),
+    var(--color-background);
+  animation: profile-card-in 380ms ease-out both;
 }
 
 .profile-state p {

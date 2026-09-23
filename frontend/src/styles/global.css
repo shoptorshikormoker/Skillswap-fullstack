@@ -126,12 +126,34 @@ a:focus-visible {
 }
 
 .page-loading {
+  position: relative;
   min-height: 100vh;
   display: grid;
+  gap: 14px;
   place-items: center;
+  align-content: center;
   color: var(--color-primary-dark);
+  background:
+    radial-gradient(circle at 50% 45%, var(--color-primary-light), transparent 18rem),
+    var(--color-background);
   font-family: var(--font-heading);
   font-weight: 700;
+}
+
+.page-loading::before {
+  width: 34px;
+  height: 34px;
+  border: 3px solid #cfe3fb;
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  content: '';
+  animation: loading-turn 700ms linear infinite;
+}
+
+@keyframes loading-turn {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes fade-up {

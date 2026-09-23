@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
+import AuthVisual from '../components/AuthVisual'
 import { useAuth } from '../context/authContext'
 import './AuthPages.css'
 
@@ -38,6 +39,7 @@ function RegisterPage() {
 
   return (
     <main className="auth-page">
+      <AuthVisual mode="register" />
       <section className="auth-card fade-up">
         <Link className="brand auth-card__brand" to="/">
           Skill<span>Swap</span>
@@ -64,6 +66,7 @@ function RegisterPage() {
               minLength="2"
               maxLength="100"
               required
+              placeholder="Your full name"
             />
             {errors.name && <small>{errors.name}</small>}
           </label>
@@ -76,6 +79,7 @@ function RegisterPage() {
               onChange={handleChange}
               autoComplete="email"
               required
+              placeholder="you@example.com"
             />
             {errors.email && <small>{errors.email}</small>}
           </label>
@@ -90,6 +94,7 @@ function RegisterPage() {
               minLength="8"
               maxLength="72"
               required
+              placeholder="Create a secure password"
             />
             <small className={errors.password ? '' : 'form-field__hint'}>
               {errors.password || 'Use at least 8 characters.'}

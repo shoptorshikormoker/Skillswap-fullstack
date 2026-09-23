@@ -1,12 +1,16 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import ProfileResultCard from '../components/ProfileResultCard'
+import { useAuth } from '../context/authContext'
 import { getCategories } from '../services/skillService'
 import { searchSkillPartners } from '../services/searchService'
 import './SearchPage.css'
 
 function SearchPage() {
-  const [skill, setSkill] = useState('')
+  const { user } = useAuth()
+  const [searchParams] = useSearchParams()
+  const initialSkill = searchParams.get('skill') || ''
+  const [skill, setSkill] = useState(initialSkill)
   const [selectedCategory, setSelectedCategory] = useState('')
   const [categories, setCategories] = useState([])
   const [results, setResults] = useState([])
@@ -15,7 +19,7 @@ function SearchPage() {
   const [hasSearched, setHasSearched] = useState(false)
 
   useEffect(() => {
-    Promise.all([getCategories(), searchSkillPartners('', '')])
+    Promise.all([getCategories(), searchSkillPartners(initialSkill, '')])
       .then(([categoryData, resultData]) => {
         setCategories(categoryData)
         setResults(resultData)
@@ -23,7 +27,7 @@ function SearchPage() {
       })
       .catch(() => setError('We could not load search results. Please try again.'))
       .finally(() => setLoading(false))
-  }, [])
+  }, [initialSkill])
 
   async function executeSearch(skillValue, categoryValue) {
     setLoading(true)
@@ -61,52 +65,66 @@ function SearchPage() {
         <Link className="brand" to="/">
           Skill<span>Swap</span>
         </Link>
-        <Link className="button button--secondary" to="/dashboard">
-          Dashboard
-        </Link>
+        <div className="workspace-nav__links">
+          <Link to="/">Home</Link>
+          <Link to={user ? '/dashboard' : '/login'}>{user ? 'Dashboard' : 'Log in'}</Link>
+        </div>
       </nav>
 
       <section className="search-hero">
-        <div className="container fade-up">
-          <p className="eyebrow">Discover skill partners</p>
-          <h1>Search for a skill you want to learn.</h1>
-          <p>Explore members who can share the skill you want to learn.</p>
+        <div className="search-hero__layout container fade-up">
+          <div className="search-hero__content">
+            <p className="eyebrow">Discover skill partners</p>
+            <h1>Find the person who can help you grow.</h1>
+            <p>Search a skill, explore matching members, and start a meaningful exchange.</p>
 
-          <form className="search-form" onSubmit={runSearch}>
-            <label htmlFor="skill-search">Skill name</label>
-            <div className="search-form__controls">
-              <input
-                id="skill-search"
-                type="search"
-                value={skill}
-                onChange={(event) => setSkill(event.target.value)}
-                placeholder="Try Java, photography, or English"
-              />
-              <button className="button button--primary" type="submit" disabled={loading}>
-                {loading ? 'Searching...' : 'Search'}
-              </button>
-            </div>
-          </form>
+            <form className="search-form" onSubmit={runSearch}>
+              <label htmlFor="skill-search">What would you like to learn?</label>
+              <div className="search-form__controls">
+                <input
+                  id="skill-search"
+                  type="search"
+                  value={skill}
+                  onChange={(event) => setSkill(event.target.value)}
+                  placeholder="Try Java, photography, or English"
+                />
+                <button className="button button--primary" type="submit" disabled={loading}>
+                  {loading ? 'Searching...' : 'Search partners'}
+                </button>
+              </div>
+            </form>
 
-          <div className="category-filter" aria-label="Filter by category">
-            <button
-              className={selectedCategory === '' ? 'is-active' : ''}
-              type="button"
-              onClick={() => chooseCategory('')}
-            >
-              All categories
-            </button>
-            {categories.map((category) => (
+            <div className="category-filter" aria-label="Filter by category">
               <button
-                className={selectedCategory === String(category.id) ? 'is-active' : ''}
-                key={category.id}
+                className={selectedCategory === '' ? 'is-active' : ''}
                 type="button"
-                onClick={() => chooseCategory(String(category.id))}
+                onClick={() => chooseCategory('')}
               >
-                {category.name}
+                All categories
               </button>
-            ))}
+              {categories.map((category) => (
+                <button
+                  className={selectedCategory === String(category.id) ? 'is-active' : ''}
+                  key={category.id}
+                  type="button"
+                  onClick={() => chooseCategory(String(category.id))}
+                >
+                  {category.name}
+                </button>
+              ))}
+            </div>
           </div>
+
+          <aside className="search-hero__visual" aria-hidden="true">
+            <span className="search-orbit search-orbit--one">Java</span>
+            <span className="search-orbit search-orbit--two">Design</span>
+            <span className="search-orbit search-orbit--three">English</span>
+            <div className="search-connection">
+              <span>S</span>
+              <strong>Skills connect people</strong>
+              <small>Learn &middot; Share &middot; Grow</small>
+            </div>
+          </aside>
         </div>
       </section>
 

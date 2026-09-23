@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
+import AuthVisual from '../components/AuthVisual'
 import { useAuth } from '../context/authContext'
 import './AuthPages.css'
 
@@ -35,6 +36,7 @@ function LoginPage() {
 
   return (
     <main className="auth-page">
+      <AuthVisual mode="login" />
       <section className="auth-card fade-up">
         <Link className="brand auth-card__brand" to="/">
           Skill<span>Swap</span>
@@ -59,6 +61,7 @@ function LoginPage() {
               onChange={handleChange}
               autoComplete="email"
               required
+              placeholder="you@example.com"
             />
           </label>
           <label className="form-field">
@@ -70,6 +73,7 @@ function LoginPage() {
               onChange={handleChange}
               autoComplete="current-password"
               required
+              placeholder="Enter your password"
             />
           </label>
           <button
