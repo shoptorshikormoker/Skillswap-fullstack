@@ -8,6 +8,7 @@ import LoginPage from './pages/LoginPage'
 import MySkillsPage from './pages/MySkillsPage'
 import PublicProfilePage from './pages/PublicProfilePage'
 import RegisterPage from './pages/RegisterPage'
+import SearchPage from './pages/SearchPage'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/profiles/:userId" element={<PublicProfilePage />} />
+          <Route path="/search" element={<SearchPage />} />
           <Route
             path="/dashboard"
             element={

@@ -29,6 +29,9 @@ function DashboardPage() {
           <Link className="button button--secondary" to="/skills">
             Manage skills
           </Link>
+          <Link className="button button--secondary" to="/search">
+            Find teachers
+          </Link>
         </div>
         <div className="account-card">
           <div>

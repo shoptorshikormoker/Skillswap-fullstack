@@ -839,14 +839,14 @@ Checklist meaning:
 
 ### Milestone 5 - Search
 
-- [ ] Create the backend skill and user search endpoint
-- [ ] Add skill-name and category filters
-- [ ] Build and style the search page
-- [ ] Build responsive search result cards
-- [ ] Link results to public profiles
-- [ ] Add search loading, empty, and error states
-- [ ] Add restrained result-card entrance and hover animations
-- [ ] Manually verify search and filters
+- [x] Create the backend skill and user search endpoint
+- [x] Add skill-name and category filters
+- [x] Build and style the search page
+- [x] Build responsive search result cards
+- [x] Link results to public profiles
+- [x] Add search loading, empty, and error states
+- [x] Add restrained result-card entrance and hover animations
+- [x] Manually verify search and filters
 - [ ] Update the README and commit the search milestone
 
 ### Milestone 6 - Exchange requests

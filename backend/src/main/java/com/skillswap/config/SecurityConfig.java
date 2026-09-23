@@ -38,6 +38,7 @@ public class SecurityConfig {
                                 HttpMethod.GET,
                                 "/api/categories",
                                 "/api/skills",
+                                "/api/search",
                                 "/api/user-skills/users/{userId:\\d+}")
                         .permitAll()
                         .anyRequest()
