@@ -121,7 +121,7 @@ npm run build
 
 ## Current progress
 
-Milestones 1 through 4 are complete. Milestone 5 search is implemented and manually verified, and is awaiting final UI review and commit. Users can manage their profiles and skills, find people by teaching skill or category, and open public profile pages from the results.
+Milestones 1 through 4 are complete. Milestone 5 search is implemented and manually verified, and is awaiting final UI review and commit. Users can manage their profiles and skills, find skill partners by shared skill or category, and open public profile pages from the results.
 
 ## Authentication pages and API
 
@@ -200,4 +200,4 @@ Backend endpoint:
 GET /api/search
 ```
 
-The public endpoint accepts optional `skill` and `categoryId` query parameters. It returns users who teach matching skills, supports partial and case-insensitive skill names, and groups each user's matching skills into one result card. Each card links to that user's public profile. When a logged-in user searches, their own profile is excluded from the results.
+The public endpoint accepts optional `skill` and `categoryId` query parameters. It returns skill partners who share matching skills, supports partial and case-insensitive skill names, and groups each user's matching skills into one result card. Each card links to that user's public profile. When a logged-in user searches, their own profile is excluded from the results.

@@ -35,7 +35,7 @@ public class SearchService {
     }
 
     @Transactional(readOnly = true)
-    public List<SearchResultResponse> searchTeachers(String skillName, Long categoryId, String currentUserEmail) {
+    public List<SearchResultResponse> searchSkillPartners(String skillName, Long categoryId, String currentUserEmail) {
         Long currentUserId = findCurrentUserId(currentUserEmail);
         List<UserSkill> matches =
                 userSkillRepository

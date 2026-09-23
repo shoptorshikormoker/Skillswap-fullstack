@@ -53,7 +53,7 @@ public class StarterDataInitializer implements CommandLineRunner {
             if (skillRepository.findByNameIgnoreCase(skillName).isEmpty()) {
                 Skill skill = new Skill();
                 skill.setName(skillName);
-                skill.setDescription("Learn or teach " + skillName + " with another SkillSwap member.");
+                skill.setDescription("Learn or share " + skillName + " with another SkillSwap member.");
                 skill.setCategory(category);
                 skillRepository.save(skill);
             }

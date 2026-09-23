@@ -6,7 +6,7 @@ import { getHealth } from '../services/healthService'
 import './HomePage.css'
 
 const steps = [
-  ['01', 'Create a profile', 'Share what you can teach and want to learn.'],
+  ['01', 'Create a profile', 'Share what you can offer and want to learn.'],
   ['02', 'Find a partner', 'Search for people with matching skills.'],
   ['03', 'Learn together', 'Schedule a session, meet, and exchange feedback.'],
 ]
@@ -56,7 +56,7 @@ function HomePage() {
           <span className="eyebrow">Learn together. Grow together.</span>
           <h1>Trade what you know for what you want to learn.</h1>
           <p className="hero__description">
-            SkillSwap connects learners who can teach each other. Each feature will be built one
+            SkillSwap connects people who can exchange knowledge. Each feature will be built one
             clear step at a time.
           </p>
           <div className="hero__actions">
@@ -70,7 +70,7 @@ function HomePage() {
         </div>
         <div className="hero__visual fade-up" aria-label="Skill exchange example">
           <article className="skill-card skill-card--teach">
-            <span>I can teach</span>
+            <span>I can share</span>
             <strong>Web Design</strong>
           </article>
           <div className="swap-mark" aria-hidden="true">

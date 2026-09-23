@@ -44,9 +44,7 @@ function RegisterPage() {
         </Link>
         <p className="eyebrow">Start learning together</p>
         <h1>Create your account.</h1>
-        <p className="auth-card__intro">
-          You can add teaching and learning skills after signing up.
-        </p>
+        <p className="auth-card__intro">You can add skills to share and learn after signing up.</p>
 
         {message && (
           <div className="form-alert" role="alert">

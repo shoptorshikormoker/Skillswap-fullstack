@@ -37,7 +37,7 @@ function MySkillsPage() {
       .finally(() => setLoading(false))
   }, [])
 
-  const teachSkills = useMemo(
+  const sharedSkills = useMemo(
     () => userSkills.filter((userSkill) => userSkill.skillType === 'TEACH'),
     [userSkills],
   )
@@ -122,16 +122,18 @@ function MySkillsPage() {
         <Link className="brand" to="/">
           Skill<span>Swap</span>
         </Link>
-        <Link className="button button--secondary" to="/dashboard">
-          Dashboard
-        </Link>
+        <div className="workspace-nav__links">
+          <Link to="/dashboard">Dashboard</Link>
+          <Link to="/search">Find partners</Link>
+          <Link to="/profile/edit">Profile</Link>
+        </div>
       </nav>
 
       <section className="skills-layout container fade-up">
         <aside className="skill-form-panel">
           <p className="eyebrow">Build your skill profile</p>
           <h1>{editingId ? 'Edit skill' : 'Add a skill'}</h1>
-          <p>Choose something you can teach or want to learn.</p>
+          <p>Choose something you can share or want to learn.</p>
 
           <form onSubmit={handleSubmit}>
             {error && <div className="form-alert">{error}</div>}
@@ -157,7 +159,7 @@ function MySkillsPage() {
               <label className="form-field">
                 <span>Goal</span>
                 <select name="skillType" value={formData.skillType} onChange={handleChange}>
-                  <option value="TEACH">I can teach</option>
+                  <option value="TEACH">I can share</option>
                   <option value="LEARN">I want to learn</option>
                 </select>
               </label>
@@ -203,7 +205,7 @@ function MySkillsPage() {
           <div className="skill-lists__heading">
             <div>
               <p className="eyebrow">Your skills</p>
-              <h2>Teach and learn together</h2>
+              <h2>Share and learn together</h2>
             </div>
             <span>{userSkills.length} total</span>
           </div>
@@ -211,13 +213,13 @@ function MySkillsPage() {
           {userSkills.length === 0 ? (
             <div className="skills-empty">
               <h3>Your skill list is empty.</h3>
-              <p>Add your first teaching or learning skill using the form.</p>
+              <p>Add your first sharing or learning skill using the form.</p>
             </div>
           ) : (
             <>
               <SkillSection
-                title="I can teach"
-                skills={teachSkills}
+                title="I can share"
+                skills={sharedSkills}
                 onEdit={handleEdit}
                 onDelete={handleDelete}
               />

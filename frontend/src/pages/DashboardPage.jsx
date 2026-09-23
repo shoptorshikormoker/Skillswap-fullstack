@@ -11,44 +11,109 @@ function DashboardPage() {
         <Link className="brand" to="/">
           Skill<span>Swap</span>
         </Link>
-        <button className="button button--secondary" type="button" onClick={logout}>
-          Log out
-        </button>
+        <div className="workspace-nav__links">
+          <Link to="/search">Find partners</Link>
+          <Link to="/skills">My skills</Link>
+          <Link to="/profile/edit">Profile</Link>
+          <button type="button" onClick={logout}>
+            Log out
+          </button>
+        </div>
       </nav>
-      <section className="dashboard-welcome container fade-up">
-        <p className="eyebrow">Your dashboard</p>
-        <h1>Welcome, {user.name}!</h1>
-        <p>Complete your profile so future skill partners can learn more about you.</p>
-        <div className="dashboard-actions">
-          <Link className="button button--primary" to="/profile/edit">
-            Edit profile
-          </Link>
-          <Link className="button button--secondary" to={`/profiles/${user.id}`}>
-            View public profile
-          </Link>
-          <Link className="button button--secondary" to="/skills">
-            Manage skills
-          </Link>
-          <Link className="button button--secondary" to="/search">
-            Find teachers
-          </Link>
-        </div>
-        <div className="account-card">
-          <div>
-            <span>Name</span>
-            <strong>{user.name}</strong>
+
+      <div className="dashboard-shell container">
+        <section className="dashboard-hero fade-up">
+          <div className="dashboard-hero__content">
+            <p className="eyebrow">Your learning space</p>
+            <h1>Welcome back, {user.name}.</h1>
+            <p>Build your skill profile and find the right person for your next exchange.</p>
+            <div className="dashboard-actions">
+              <Link className="button button--primary" to="/search">
+                Find a skill partner
+              </Link>
+              <Link className="button dashboard-hero__secondary" to="/skills">
+                Add a skill
+              </Link>
+            </div>
           </div>
-          <div>
-            <span>Email</span>
-            <strong>{user.email}</strong>
+          <div className="dashboard-hero__identity" aria-hidden="true">
+            <span>{user.name.charAt(0).toUpperCase()}</span>
+            <small>Ready to learn</small>
           </div>
-          <div>
-            <span>Role</span>
-            <strong>{user.role}</strong>
+        </section>
+
+        <section className="dashboard-section" aria-labelledby="quick-actions-title">
+          <div className="dashboard-section__heading">
+            <div>
+              <p className="eyebrow">Quick actions</p>
+              <h2 id="quick-actions-title">What would you like to do?</h2>
+            </div>
           </div>
-        </div>
-      </section>
+          <div className="dashboard-action-grid">
+            <DashboardAction
+              number="01"
+              title="Find skill partners"
+              description="Search by skill and discover members ready to exchange knowledge."
+              to="/search"
+              accent="blue"
+            />
+            <DashboardAction
+              number="02"
+              title="Manage skills"
+              description="Add the skills you can share and what you would like to learn."
+              to="/skills"
+              accent="green"
+            />
+            <DashboardAction
+              number="03"
+              title="Improve profile"
+              description="Share your bio, location, availability, and profile photo."
+              to="/profile/edit"
+              accent="orange"
+            />
+          </div>
+        </section>
+
+        <section className="dashboard-bottom-grid">
+          <div className="account-card">
+            <div className="account-card__heading">
+              <span>Account overview</span>
+              <Link to={`/profiles/${user.id}`}>View public profile &rarr;</Link>
+            </div>
+            <div className="account-card__row">
+              <span>Name</span>
+              <strong>{user.name}</strong>
+            </div>
+            <div className="account-card__row">
+              <span>Email</span>
+              <strong>{user.email}</strong>
+            </div>
+            <div className="account-card__row">
+              <span>Role</span>
+              <strong className="account-role">{user.role}</strong>
+            </div>
+          </div>
+
+          <aside className="dashboard-tip">
+            <span className="dashboard-tip__mark">Tip</span>
+            <h2>A complete profile builds trust.</h2>
+            <p>Add a short bio and your availability before contacting a learning partner.</p>
+            <Link to="/profile/edit">Complete your profile &rarr;</Link>
+          </aside>
+        </section>
+      </div>
     </main>
+  )
+}
+
+function DashboardAction({ number, title, description, to, accent }) {
+  return (
+    <Link className={`dashboard-action dashboard-action--${accent}`} to={to}>
+      <span className="dashboard-action__number">{number}</span>
+      <h3>{title}</h3>
+      <p>{description}</p>
+      <strong>Open &rarr;</strong>
+    </Link>
   )
 }
 

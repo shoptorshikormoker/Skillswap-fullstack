@@ -24,7 +24,7 @@ function ProfileResultCard({ result, index }) {
         {result.bio || 'This member has not added a biography yet.'}
       </p>
 
-      <div className="profile-result__skills" aria-label="Matching teaching skills">
+      <div className="profile-result__skills" aria-label="Matching shared skills">
         {result.matchingSkills.map((skill) => (
           <SkillChip key={skill.id}>{skill.name}</SkillChip>
         ))}

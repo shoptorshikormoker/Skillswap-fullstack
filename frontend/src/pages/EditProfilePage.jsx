@@ -87,9 +87,11 @@ function EditProfilePage() {
         <Link className="brand" to="/">
           Skill<span>Swap</span>
         </Link>
-        <Link className="button button--secondary" to="/dashboard">
-          Dashboard
-        </Link>
+        <div className="workspace-nav__links">
+          <Link to="/dashboard">Dashboard</Link>
+          <Link to="/skills">My skills</Link>
+          <Link to="/search">Find partners</Link>
+        </div>
       </nav>
 
       <section className="profile-editor container fade-up">
@@ -130,7 +132,7 @@ function EditProfilePage() {
               onChange={handleChange}
               maxLength="1000"
               rows="6"
-              placeholder="Share what you enjoy learning and teaching."
+              placeholder="Share what you enjoy learning and exchanging with others."
             />
             <small className={errors.bio ? '' : 'form-field__hint'}>
               {errors.bio || `${formData.bio.length}/1000 characters`}

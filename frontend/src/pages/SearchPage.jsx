@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import ProfileResultCard from '../components/ProfileResultCard'
 import { getCategories } from '../services/skillService'
-import { searchTeachers } from '../services/searchService'
+import { searchSkillPartners } from '../services/searchService'
 import './SearchPage.css'
 
 function SearchPage() {
@@ -15,7 +15,7 @@ function SearchPage() {
   const [hasSearched, setHasSearched] = useState(false)
 
   useEffect(() => {
-    Promise.all([getCategories(), searchTeachers('', '')])
+    Promise.all([getCategories(), searchSkillPartners('', '')])
       .then(([categoryData, resultData]) => {
         setCategories(categoryData)
         setResults(resultData)
@@ -29,7 +29,7 @@ function SearchPage() {
     setLoading(true)
     setError('')
     try {
-      const data = await searchTeachers(skillValue, categoryValue)
+      const data = await searchSkillPartners(skillValue, categoryValue)
       setResults(data)
       setHasSearched(true)
     } catch {
@@ -68,9 +68,9 @@ function SearchPage() {
 
       <section className="search-hero">
         <div className="container fade-up">
-          <p className="eyebrow">Find your learning partner</p>
+          <p className="eyebrow">Discover skill partners</p>
           <h1>Search for a skill you want to learn.</h1>
-          <p>Explore SkillSwap members who are ready to teach and open their public profiles.</p>
+          <p>Explore members who can share the skill you want to learn.</p>
 
           <form className="search-form" onSubmit={runSearch}>
             <label htmlFor="skill-search">Skill name</label>
@@ -113,7 +113,7 @@ function SearchPage() {
       <section className="search-results container">
         <div className="search-results__heading">
           <div>
-            <p className="eyebrow">Available teachers</p>
+            <p className="eyebrow">Available skill partners</p>
             <h2>
               {loading
                 ? 'Searching...'
@@ -151,7 +151,7 @@ function SearchPage() {
 
         {!error && !loading && hasSearched && results.length === 0 && (
           <div className="search-state">
-            <h3>No matching teachers yet.</h3>
+            <h3>No matching skill partners yet.</h3>
             <p>Try another skill name or select a different category.</p>
             <button className="button button--secondary" type="button" onClick={clearFilters}>
               Clear filters

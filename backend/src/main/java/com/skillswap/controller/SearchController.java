@@ -20,13 +20,13 @@ public class SearchController {
     }
 
     @GetMapping
-    public List<SearchResultResponse> searchTeachers(
+    public List<SearchResultResponse> searchSkillPartners(
             @RequestParam(required = false)
             String skill,
             @RequestParam(required = false)
             Long categoryId,
             Principal principal) {
         String currentUserEmail = principal == null ? null : principal.getName();
-        return searchService.searchTeachers(skill, categoryId, currentUserEmail);
+        return searchService.searchSkillPartners(skill, categoryId, currentUserEmail);
     }
 }

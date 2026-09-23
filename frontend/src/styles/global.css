@@ -92,6 +92,35 @@ a:focus-visible {
   background: var(--color-surface);
 }
 
+.workspace-nav__links {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.workspace-nav__links a,
+.workspace-nav__links button {
+  padding: 7px 10px;
+  border: 0;
+  border-radius: 7px;
+  color: var(--color-text-muted);
+  background: transparent;
+  font-size: 0.86rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    color 170ms ease,
+    background 170ms ease,
+    transform 170ms ease;
+}
+
+.workspace-nav__links a:hover,
+.workspace-nav__links button:hover {
+  color: var(--color-primary-dark);
+  background: var(--color-primary-light);
+  transform: translateY(-1px);
+}
+
 .fade-up {
   animation: fade-up 400ms ease-out both;
 }
@@ -119,6 +148,10 @@ a:focus-visible {
 @media (max-width: 640px) {
   .container {
     width: min(calc(100% - 28px), var(--container-width));
+  }
+
+  .workspace-nav__links a:not(:last-of-type) {
+    display: none;
   }
 }
 

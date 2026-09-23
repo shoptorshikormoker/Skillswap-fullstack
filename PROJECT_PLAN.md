@@ -2,7 +2,7 @@
 
 ## 1. Project Overview
 
-SkillSwap is a full-stack web application where people can exchange skills. Users list skills they can teach and want to learn, find other users, send exchange requests, schedule learning sessions, chat, and leave reviews.
+SkillSwap is a full-stack web application where people can exchange skills. Users list skills they can share and want to learn, find skill partners, send exchange requests, schedule learning sessions, chat, and leave reviews.
 
 This is also a learning project. Features will be built one at a time using simple code and a familiar layered structure.
 
@@ -52,7 +52,7 @@ The first version will not use Tailwind CSS, OpenAPI/Swagger, Docker, or automat
 
 - Register and log in
 - View and update their profile
-- Add skills they can teach or want to learn
+- Add skills they can share or want to learn
 - Search for skills and users
 - Send, accept, reject, or cancel an exchange request
 - Schedule and complete a learning session
@@ -107,14 +107,14 @@ For the first version, use an image URL instead of file upload. File upload can 
 
 - Search by skill name
 - Filter by category
-- View users who teach a selected skill
+- View skill partners who share a selected skill
 - Open a user's public profile
 
 Start with simple search. Pagination and advanced filters can be added later.
 
 ### 5.5 Exchange requests
 
-- Select a skill the sender can teach
+- Select a skill the sender can share
 - Select a skill the sender wants to learn
 - Add a short request message
 - Send the request to another user
@@ -205,7 +205,7 @@ Start with REST-based messaging and a refresh button or timed refresh. WebSocket
 ```text
 Register or log in
     -> Complete profile
-    -> Add skills to teach and learn
+    -> Add skills to share and learn
     -> Search for a skill or user
     -> Send an exchange request
     -> Other user accepts the request
@@ -442,7 +442,7 @@ Do not use coral and blue equally everywhere. Blue is the main interaction color
 - Use white cards on an off-white background with a subtle border and shadow.
 - Use rounded buttons and cards, but keep form fields slightly less rounded.
 - Keep the navigation simple: logo, main links, notifications, and profile menu.
-- Use skill chips for categories and teach/learn labels.
+- Use skill chips for categories and share/learn labels.
 - Use clear colored status badges for pending, accepted, completed, rejected, and cancelled states.
 - Use friendly empty states with a short message and one clear action.
 - Keep forms one column on mobile and use two columns only when it improves clarity on desktop.
@@ -452,7 +452,7 @@ Do not use coral and blue equally everywhere. Blue is the main interaction color
 - **Home:** large headline, short explanation, two action buttons, skill-category cards, and a three-step "How it works" section.
 - **Dashboard:** greeting, small summary cards, recent requests, upcoming session, and recommended skills.
 - **Search:** prominent search field, category chips, simple filter panel, and profile result cards.
-- **Profile:** profile header, rating, biography, teach/learn skill sections, and an exchange-request button.
+- **Profile:** profile header, rating, biography, share/learn skill sections, and an exchange-request button.
 - **Exchange requests:** separate Received and Sent tabs with readable status badges.
 - **Session:** date/time card, agenda, meeting details, partner summary, and session action buttons.
 - **Video meeting:** large meeting area, clear Join/Leave actions, permission guidance, and a fallback meeting link.
@@ -640,7 +640,7 @@ Commit the backend profile flow, edit page, public page, and responsive styling 
 ### Milestone 4 - Skills and categories
 
 - Create categories and skills
-- Add, edit, and remove teach/learn skills from profiles
+- Add, edit, and remove share/learn skills from profiles
 - Build the skill management pages
 
 Learning goal: understand database relationships and reusable UI components.
@@ -832,7 +832,7 @@ Checklist meaning:
 - [x] Add starter skill categories
 - [x] Build reusable skill card, chip, and status badge components
 - [x] Build and style the My Skills page
-- [x] Add teach and learn skills to a profile
+- [x] Add share and learn skills to a profile
 - [x] Edit and remove profile skills
 - [x] Manually verify skill validation, ownership, and relationships
 - [x] Update the README and commit the skills milestone

@@ -1,6 +1,6 @@
 import api from './api'
 
-export async function searchTeachers(skill, categoryId) {
+export async function searchSkillPartners(skill, categoryId) {
   const response = await api.get('/search', {
     params: {
       skill: skill.trim() || undefined,

@@ -41,7 +41,7 @@ function PublicProfilePage() {
   }
 
   const initial = profile.name.charAt(0).toUpperCase()
-  const teachSkills = userSkills.filter((userSkill) => userSkill.skillType === 'TEACH')
+  const sharedSkills = userSkills.filter((userSkill) => userSkill.skillType === 'TEACH')
   const learnSkills = userSkills.filter((userSkill) => userSkill.skillType === 'LEARN')
 
   return (
@@ -50,9 +50,10 @@ function PublicProfilePage() {
         <Link className="brand" to="/">
           Skill<span>Swap</span>
         </Link>
-        <Link className="button button--secondary" to="/">
-          Home
-        </Link>
+        <div className="workspace-nav__links">
+          <Link to="/">Home</Link>
+          <Link to="/search">Find partners</Link>
+        </div>
       </nav>
 
       <section className="public-profile container fade-up">
@@ -96,13 +97,13 @@ function PublicProfilePage() {
           </div>
           {userSkills.length ? (
             <>
-              <PublicSkillSection title="Can teach" skills={teachSkills} />
+              <PublicSkillSection title="Can share" skills={sharedSkills} />
               <PublicSkillSection title="Wants to learn" skills={learnSkills} />
             </>
           ) : (
             <div className="profile-empty">
               <h3>No skills added yet.</h3>
-              <p>{profile.name} has not added teaching or learning skills.</p>
+              <p>{profile.name} has not added sharing or learning skills.</p>
             </div>
           )}
         </section>
