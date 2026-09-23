@@ -34,6 +34,12 @@ public class SecurityConfig {
                         .permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/profiles/{userId:\\d+}")
                         .permitAll()
+                        .requestMatchers(
+                                HttpMethod.GET,
+                                "/api/categories",
+                                "/api/skills",
+                                "/api/user-skills/users/{userId:\\d+}")
+                        .permitAll()
                         .anyRequest()
                         .authenticated())
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)

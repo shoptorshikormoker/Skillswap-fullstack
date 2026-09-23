@@ -1,0 +1,94 @@
+.skill-chip,
+.skill-status {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.035em;
+}
+
+.skill-chip {
+  color: var(--color-text-muted);
+  background: #f1f3f6;
+}
+
+.skill-status {
+  text-transform: uppercase;
+}
+
+.skill-status--teach {
+  color: #286f31;
+  background: var(--color-success-light);
+}
+
+.skill-status--learn {
+  color: var(--color-primary-dark);
+  background: var(--color-primary-light);
+}
+
+.skill-item {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.skill-item:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.skill-item__topline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.skill-item h3 {
+  margin-bottom: 5px;
+  font-size: 1.25rem;
+}
+
+.skill-item > p {
+  color: var(--color-text-muted);
+}
+
+.skill-item .skill-item__level {
+  margin-bottom: 14px;
+  color: var(--color-primary-dark);
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.skill-item__actions {
+  display: flex;
+  gap: 16px;
+  margin-top: auto;
+  padding-top: 18px;
+  border-top: 1px solid var(--color-border);
+}
+
+.skill-item__actions button {
+  padding: 0;
+  border: 0;
+  color: var(--color-primary-dark);
+  background: transparent;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.skill-item__actions .skill-item__delete {
+  color: var(--color-error);
+}

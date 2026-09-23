@@ -1,17 +1,23 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import SkillCard from '../components/SkillCard'
 import { getPublicProfile } from '../services/profileService'
+import { getUserSkills } from '../services/skillService'
 import './ProfilePages.css'
 
 function PublicProfilePage() {
   const { userId } = useParams()
   const [profile, setProfile] = useState(null)
+  const [userSkills, setUserSkills] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
 
   useEffect(() => {
-    getPublicProfile(userId)
-      .then(setProfile)
+    Promise.all([getPublicProfile(userId), getUserSkills(userId)])
+      .then(([profileData, skillData]) => {
+        setProfile(profileData)
+        setUserSkills(skillData)
+      })
       .catch((requestError) =>
         setError(requestError.response?.data?.message || 'We could not load this profile.'),
       )
@@ -35,6 +41,8 @@ function PublicProfilePage() {
   }
 
   const initial = profile.name.charAt(0).toUpperCase()
+  const teachSkills = userSkills.filter((userSkill) => userSkill.skillType === 'TEACH')
+  const learnSkills = userSkills.filter((userSkill) => userSkill.skillType === 'LEARN')
 
   return (
     <main className="profile-page">
@@ -80,8 +88,41 @@ function PublicProfilePage() {
             <p>{profile.name} has not added their profile details yet.</p>
           </div>
         )}
+
+        <section className="public-profile__skills">
+          <div>
+            <p className="eyebrow">Skill exchange</p>
+            <h2>Skills</h2>
+          </div>
+          {userSkills.length ? (
+            <>
+              <PublicSkillSection title="Can teach" skills={teachSkills} />
+              <PublicSkillSection title="Wants to learn" skills={learnSkills} />
+            </>
+          ) : (
+            <div className="profile-empty">
+              <h3>No skills added yet.</h3>
+              <p>{profile.name} has not added teaching or learning skills.</p>
+            </div>
+          )}
+        </section>
       </section>
     </main>
+  )
+}
+
+function PublicSkillSection({ title, skills }) {
+  if (!skills.length) return null
+
+  return (
+    <div className="public-skill-section">
+      <h3>{title}</h3>
+      <div className="public-skill-grid">
+        {skills.map((userSkill) => (
+          <SkillCard key={userSkill.id} userSkill={userSkill} />
+        ))}
+      </div>
+    </div>
   )
 }
 

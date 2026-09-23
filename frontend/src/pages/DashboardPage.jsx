@@ -26,6 +26,9 @@ function DashboardPage() {
           <Link className="button button--secondary" to={`/profiles/${user.id}`}>
             View public profile
           </Link>
+          <Link className="button button--secondary" to="/skills">
+            Manage skills
+          </Link>
         </div>
         <div className="account-card">
           <div>

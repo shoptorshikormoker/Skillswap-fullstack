@@ -167,6 +167,29 @@
   margin-bottom: 8px;
 }
 
+.public-profile__skills {
+  margin-top: 48px;
+}
+
+.public-profile__skills h2 {
+  margin: 6px 0 24px;
+  font-size: clamp(1.7rem, 4vw, 2.3rem);
+}
+
+.public-skill-section + .public-skill-section {
+  margin-top: 32px;
+}
+
+.public-skill-section > h3 {
+  margin-bottom: 14px;
+}
+
+.public-skill-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
 .profile-state {
   min-height: 100vh;
   display: grid;
@@ -193,7 +216,8 @@
   }
 
   .profile-form__row,
-  .profile-details {
+  .profile-details,
+  .public-skill-grid {
     grid-template-columns: 1fr;
   }
 }

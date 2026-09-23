@@ -121,7 +121,7 @@ npm run build
 
 ## Current progress
 
-Milestones 1, 2, and 3 are complete and manually verified. Profile management includes private editing, public profile pages, ownership protection, validation, and responsive layouts for phone and desktop widths.
+Milestones 1, 2, 3, and 4 are complete and manually verified. Users can manage their profiles, add teaching and learning skills, choose experience levels, and display their skills on public profile pages.
 
 ## Authentication pages and API
 
@@ -161,3 +161,27 @@ GET /api/profiles/{userId}
 ```
 
 The edit page and `/api/profiles/me` endpoints require authentication. Profile updates always use the authenticated user, so one user cannot update another user's profile. Public profile responses do not include email addresses or passwords.
+
+## Skills page and API
+
+The authenticated skill-management page is available at:
+
+```text
+http://localhost:5173/skills
+```
+
+The application creates four starter categories and twelve starter skills when the backend starts. The initializer is safe to run repeatedly and does not create duplicate records.
+
+Backend endpoints:
+
+```text
+GET    /api/categories
+GET    /api/skills
+GET    /api/user-skills/me
+POST   /api/user-skills/me
+PUT    /api/user-skills/me/{userSkillId}
+DELETE /api/user-skills/me/{userSkillId}
+GET    /api/user-skills/users/{userId}
+```
+
+Users can add skills as `TEACH` or `LEARN` and select `BEGINNER`, `INTERMEDIATE`, or `ADVANCED`. Update and delete operations use the authenticated user, preventing one user from changing another user's skills. Public user skills are displayed on public profile pages.

@@ -825,17 +825,17 @@ Checklist meaning:
 
 ### Milestone 4 - Skills and categories
 
-- [ ] Create category and skill entities
-- [ ] Create the user-skill entity, type enum, and level enum
-- [ ] Create category, skill, and user-skill repositories
-- [ ] Create related DTOs, services, and controllers
-- [ ] Add starter skill categories
-- [ ] Build reusable skill card, chip, and status badge components
-- [ ] Build and style the My Skills page
-- [ ] Add teach and learn skills to a profile
-- [ ] Edit and remove profile skills
-- [ ] Manually verify skill validation, ownership, and relationships
-- [ ] Update the README and commit the skills milestone
+- [x] Create category and skill entities
+- [x] Create the user-skill entity, type enum, and level enum
+- [x] Create category, skill, and user-skill repositories
+- [x] Create related DTOs, services, and controllers
+- [x] Add starter skill categories
+- [x] Build reusable skill card, chip, and status badge components
+- [x] Build and style the My Skills page
+- [x] Add teach and learn skills to a profile
+- [x] Edit and remove profile skills
+- [x] Manually verify skill validation, ownership, and relationships
+- [x] Update the README and commit the skills milestone
 
 ### Milestone 5 - Search
 

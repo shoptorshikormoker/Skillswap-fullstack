@@ -5,6 +5,7 @@ import DashboardPage from './pages/DashboardPage'
 import EditProfilePage from './pages/EditProfilePage'
 import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
+import MySkillsPage from './pages/MySkillsPage'
 import PublicProfilePage from './pages/PublicProfilePage'
 import RegisterPage from './pages/RegisterPage'
 
@@ -30,6 +31,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <EditProfilePage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/skills"
+            element={
+              <ProtectedRoute>
+                <MySkillsPage />
               </ProtectedRoute>
             }
           />
