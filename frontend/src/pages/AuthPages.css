@@ -4,7 +4,7 @@
 }
 
 .auth-page {
-  min-height: calc(100vh - 79px);
+  min-height: calc(100vh - 68px);
   display: grid;
   grid-template-columns: minmax(360px, 0.85fr) minmax(480px, 1.15fr);
   background: #f7f9fc;
@@ -14,7 +14,7 @@
   position: relative;
   display: grid;
   place-items: center;
-  padding: 64px;
+  padding: 46px;
   overflow: hidden;
   color: #fff;
   background:
@@ -59,7 +59,7 @@
 
 .auth-visual h2 {
   margin: 14px 0 15px;
-  font-size: clamp(2rem, 4vw, 3.4rem);
+  font-size: clamp(1.8rem, 3.6vw, 2.8rem);
   letter-spacing: -0.05em;
 }
 
@@ -121,7 +121,7 @@
   width: min(100% - 40px, 510px);
   align-self: center;
   justify-self: center;
-  padding: 38px;
+  padding: 30px;
   border: 1px solid var(--color-border);
   border-radius: 18px;
   background: rgba(255, 255, 255, 0.94);
@@ -134,7 +134,7 @@
 
 .auth-card h1 {
   margin: 8px 0 10px;
-  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  font-size: clamp(1.5rem, 3.5vw, 1.9rem);
   letter-spacing: -0.04em;
 }
 

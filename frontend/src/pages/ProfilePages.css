@@ -13,20 +13,20 @@
 
 .profile-editor,
 .public-profile {
-  padding-block: 42px 64px;
+  padding-block: 30px 52px;
 }
 
 .profile-editor {
   display: grid;
   grid-template-columns: minmax(240px, 0.7fr) minmax(0, 1.3fr);
-  gap: 38px;
+  gap: 28px;
   align-items: start;
 }
 
 .profile-editor__heading {
   position: sticky;
   top: 32px;
-  padding: 28px;
+  padding: 22px;
   border: 1px solid #dce9f8;
   border-radius: var(--radius-lg);
   background: radial-gradient(circle at 100% 0, rgba(23, 105, 224, 0.13), transparent 13rem), #fff;
@@ -36,7 +36,7 @@
 .profile-editor__heading h1,
 .public-profile h1 {
   margin: 10px 0 14px;
-  font-size: clamp(1.75rem, 4vw, 2.7rem);
+  font-size: clamp(1.55rem, 3.5vw, 2.25rem);
   letter-spacing: -0.04em;
 }
 
@@ -149,7 +149,7 @@
 }
 
 .profile-form {
-  padding: 32px;
+  padding: 24px;
   animation: profile-card-in 380ms 70ms ease-out both;
 }
 
@@ -204,9 +204,9 @@
 .public-profile__header {
   position: relative;
   display: flex;
-  gap: 28px;
+  gap: 22px;
   align-items: center;
-  padding: 36px;
+  padding: 28px;
   overflow: hidden;
   border: 0;
   color: #fff;
@@ -218,9 +218,9 @@
 
 .public-profile__header img,
 .profile-avatar {
-  width: 96px;
-  height: 96px;
-  flex: 0 0 96px;
+  width: 80px;
+  height: 80px;
+  flex: 0 0 80px;
   border-radius: 50%;
 }
 
@@ -235,7 +235,7 @@
   color: var(--color-primary-dark);
   background: #fff;
   font-family: var(--font-heading);
-  font-size: 2.2rem;
+  font-size: 1.8rem;
   font-weight: 800;
 }
 
@@ -277,7 +277,7 @@
 
 .profile-details article,
 .profile-empty {
-  padding: 22px;
+  padding: 18px;
 }
 
 .profile-details span {
@@ -322,12 +322,12 @@
 }
 
 .public-profile__skills {
-  margin-top: 34px;
+  margin-top: 28px;
 }
 
 .public-profile__skills h2 {
   margin: 6px 0 24px;
-  font-size: clamp(1.45rem, 3vw, 1.9rem);
+  font-size: clamp(1.25rem, 2.6vw, 1.6rem);
 }
 
 .public-skill-section + .public-skill-section {

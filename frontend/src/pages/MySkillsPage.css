@@ -14,7 +14,7 @@
 .skills-layout {
   display: grid;
   grid-template-columns: minmax(300px, 0.72fr) minmax(0, 1.28fr);
-  gap: 28px;
+  gap: 22px;
   align-items: start;
   padding-block: 38px 64px;
 }
@@ -22,7 +22,7 @@
 .skill-form-panel {
   position: sticky;
   top: 24px;
-  padding: 24px;
+  padding: 19px;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   background: var(--color-surface);
@@ -32,7 +32,7 @@
 
 .skill-form-panel h1 {
   margin: 8px 0;
-  font-size: clamp(1.55rem, 3vw, 2rem);
+  font-size: clamp(1.35rem, 2.7vw, 1.7rem);
 }
 
 .skill-form-panel > p:not(.eyebrow) {
@@ -89,7 +89,7 @@
 
 .skill-lists__heading {
   display: flex;
-  gap: 24px;
+  gap: 19px;
   justify-content: space-between;
   align-items: end;
   margin-bottom: 24px;
@@ -97,7 +97,7 @@
 
 .skill-lists__heading h2 {
   margin: 8px 0 0;
-  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-size: clamp(1.3rem, 2.7vw, 1.7rem);
 }
 
 .skill-lists__heading > span {
@@ -121,7 +121,7 @@
 
 .skills-empty,
 .skill-section__empty {
-  padding: 28px;
+  padding: 22px;
   border: 1px dashed #c8d1de;
   border-radius: var(--radius-md);
   color: var(--color-text-muted);

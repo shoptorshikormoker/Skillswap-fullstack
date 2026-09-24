@@ -5,16 +5,16 @@
 }
 
 .site-header__nav {
-  min-height: 78px;
+  min-height: 68px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 28px;
+  gap: 22px;
 }
 
 .site-header__brand {
-  width: 190px;
-  height: 55px;
+  width: 166px;
+  height: 48px;
 }
 
 .site-header__links {
