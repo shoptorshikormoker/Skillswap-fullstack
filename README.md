@@ -10,6 +10,8 @@ SkillSwap is a beginner-friendly full-stack learning project where users exchang
 
 The detailed roadmap and progress checklist are in [PROJECT_PLAN.md](PROJECT_PLAN.md).
 
+Local demonstration credentials and suggested test workflows are documented in [SAMPLE_USERS.md](SAMPLE_USERS.md).
+
 ## Project folders
 
 ```text
