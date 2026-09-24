@@ -210,7 +210,7 @@ Authenticated users can open their request workspace at:
 http://localhost:5173/exchanges
 ```
 
-An exchange can be requested from another member's public profile when the sender has a skill to teach and the recipient teaches a skill from the sender's learning list. The recipient does not need to add the offered skill to their learning list before receiving a request.
+An exchange can be requested from another member's public profile when the sender has a skill to teach and the recipient has a skill to share. The requested skill can be selected directly from the recipient's teaching list; it does not need to be added to the sender's learning list first. The recipient also does not need to add the offered skill to their learning list before receiving a request.
 
 Backend endpoints:
 

@@ -17,13 +17,8 @@ function ExchangeRequestForm({ receiverId, receiverName, receiverSkills, onClose
       .finally(() => setLoading(false))
   }, [])
 
-  const receiverTeaches = new Set(
-    receiverSkills.filter((item) => item.skillType === 'TEACH').map((item) => item.skillId),
-  )
   const offeredOptions = mySkills.filter((item) => item.skillType === 'TEACH')
-  const wantedOptions = mySkills.filter(
-    (item) => item.skillType === 'LEARN' && receiverTeaches.has(item.skillId),
-  )
+  const wantedOptions = receiverSkills.filter((item) => item.skillType === 'TEACH')
   const canExchange = offeredOptions.length > 0 && wantedOptions.length > 0
 
   async function submit(event) {
@@ -80,8 +75,8 @@ function ExchangeRequestForm({ receiverId, receiverName, receiverSkills, onClose
               <p>Loading skill matches...</p>
             ) : !canExchange ? (
               <div className="request-warning">
-                You need at least one teaching skill, plus a learning skill that this member
-                teaches. Update your skills and try again.
+                Add at least one skill you can teach. This member must also have a teaching skill
+                you can request.
               </div>
             ) : (
               <div className="request-fields">
