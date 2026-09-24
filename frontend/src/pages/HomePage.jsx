@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import BrandLogo from '../components/BrandLogo'
 import { useAuth } from '../context/authContext'
 import './HomePage.css'
 
@@ -62,9 +63,7 @@ function HomePage() {
   return (
     <main className="home-page">
       <nav className="navbar home-navbar container" aria-label="Main navigation">
-        <Link className="brand" to="/" aria-label="SkillSwap home">
-          Skill<span>Swap</span>
-        </Link>
+        <BrandLogo />
         <div className="home-navbar__links">
           <a href="#discover">Discover</a>
           <a href="#how-it-works">How it works</a>
@@ -214,9 +213,7 @@ function HomePage() {
       </section>
 
       <footer className="home-footer container">
-        <Link className="brand" to="/">
-          Skill<span>Swap</span>
-        </Link>
+        <BrandLogo />
         <p>Share a skill. Learn a skill. Grow together.</p>
         <Link to="/search">Discover partners &rarr;</Link>
       </footer>

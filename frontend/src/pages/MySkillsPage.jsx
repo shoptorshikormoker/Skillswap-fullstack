@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
+import BrandLogo from '../components/BrandLogo'
 import SkillCard from '../components/SkillCard'
 import {
   addMySkill,
@@ -119,9 +120,7 @@ function MySkillsPage() {
   return (
     <main className="skills-page">
       <nav className="navbar container" aria-label="Skills navigation">
-        <Link className="brand" to="/">
-          Skill<span>Swap</span>
-        </Link>
+        <BrandLogo />
         <div className="workspace-nav__links">
           <Link to="/dashboard">Dashboard</Link>
           <Link to="/search">Find partners</Link>

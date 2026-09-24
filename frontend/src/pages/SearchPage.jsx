@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
+import BrandLogo from '../components/BrandLogo'
 import ProfileResultCard from '../components/ProfileResultCard'
 import { useAuth } from '../context/authContext'
 import { getCategories, getSkills } from '../services/skillService'
@@ -70,9 +71,7 @@ function SearchPage() {
   return (
     <main className="search-page">
       <nav className="navbar container" aria-label="Search navigation">
-        <Link className="brand" to="/">
-          Skill<span>Swap</span>
-        </Link>
+        <BrandLogo />
         <div className="workspace-nav__links">
           <Link to="/">Home</Link>
           <Link to={user ? '/dashboard' : '/login'}>{user ? 'Dashboard' : 'Log in'}</Link>

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import AuthVisual from '../components/AuthVisual'
+import BrandLogo from '../components/BrandLogo'
 import { useAuth } from '../context/authContext'
 import './AuthPages.css'
 
@@ -38,9 +39,7 @@ function LoginPage() {
     <main className="auth-page">
       <AuthVisual mode="login" />
       <section className="auth-card fade-up">
-        <Link className="brand auth-card__brand" to="/">
-          Skill<span>Swap</span>
-        </Link>
+        <BrandLogo className="auth-card__brand" />
         <p className="eyebrow">Welcome back</p>
         <h1>Log in to continue learning.</h1>
         <p className="auth-card__intro">Access your exchanges, sessions, and learning partners.</p>

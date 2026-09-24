@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import BrandLogo from '../components/BrandLogo'
 import { useAuth } from '../context/authContext'
 import { getReceivedRequests } from '../services/exchangeService'
 import { getSessions } from '../services/sessionService'
@@ -23,9 +24,7 @@ function DashboardPage() {
   return (
     <main className="dashboard-page">
       <nav className="navbar dashboard-navbar container" aria-label="Dashboard navigation">
-        <Link className="brand" to="/">
-          Skill<span>Swap</span>
-        </Link>
+        <BrandLogo />
         <div className="workspace-nav__links">
           <Link to="/search">Find partners</Link>
           <Link to="/skills">My skills</Link>

@@ -4,6 +4,7 @@ function AuthVisual({ mode }) {
   return (
     <aside className="auth-visual" aria-hidden="true">
       <div className="auth-visual__content">
+        <img className="auth-visual__logo" src="/logo-sq.png" alt="" />
         <span className="auth-visual__label">SkillSwap community</span>
         <h2>
           {isLogin ? 'Continue your learning journey.' : 'Everyone has something worth sharing.'}
