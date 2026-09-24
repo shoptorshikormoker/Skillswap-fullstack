@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
-import { getMySkills } from '../services/skillService'
+import { getMySkills, getSkills } from '../services/skillService'
 import { sendExchangeRequest } from '../services/exchangeService'
 
-function ExchangeRequestForm({ receiverId, receiverName, receiverSkills, onClose }) {
+function ExchangeRequestForm({ receiverId, receiverName, onClose }) {
   const [mySkills, setMySkills] = useState([])
+  const [availableSkills, setAvailableSkills] = useState([])
   const [form, setForm] = useState({ offeredSkillId: '', wantedSkillId: '', message: '' })
   const [loading, setLoading] = useState(true)
   const [submitting, setSubmitting] = useState(false)
@@ -11,15 +12,17 @@ function ExchangeRequestForm({ receiverId, receiverName, receiverSkills, onClose
   const [success, setSuccess] = useState(false)
 
   useEffect(() => {
-    getMySkills()
-      .then(setMySkills)
+    Promise.all([getMySkills(), getSkills()])
+      .then(([userSkills, skillCatalog]) => {
+        setMySkills(userSkills)
+        setAvailableSkills(skillCatalog)
+      })
       .catch(() => setError('We could not load your skills.'))
       .finally(() => setLoading(false))
   }, [])
 
   const offeredOptions = mySkills.filter((item) => item.skillType === 'TEACH')
-  const wantedOptions = receiverSkills.filter((item) => item.skillType === 'TEACH')
-  const canExchange = offeredOptions.length > 0 && wantedOptions.length > 0
+  const canExchange = offeredOptions.length > 0 && availableSkills.length > 0
 
   async function submit(event) {
     event.preventDefault()
@@ -70,13 +73,12 @@ function ExchangeRequestForm({ receiverId, receiverName, receiverSkills, onClose
           <form onSubmit={submit}>
             <p className="eyebrow">Start an exchange</p>
             <h2 id="request-title">Send a request to {receiverName}</h2>
-            <p>Offer one of your teaching skills and choose a skill this member teaches.</p>
+            <p>Offer one of your teaching skills and choose what you would like to learn.</p>
             {loading ? (
               <p>Loading skill matches...</p>
             ) : !canExchange ? (
               <div className="request-warning">
-                Add at least one skill you can teach. This member must also have a teaching skill
-                you can request.
+                Add at least one skill you can teach before sending an exchange request.
               </div>
             ) : (
               <div className="request-fields">
@@ -103,9 +105,9 @@ function ExchangeRequestForm({ receiverId, receiverName, receiverSkills, onClose
                     onChange={(e) => setForm({ ...form, wantedSkillId: e.target.value })}
                   >
                     <option value="">Choose your requested skill</option>
-                    {wantedOptions.map((item) => (
-                      <option key={item.id} value={item.skillId}>
-                        {item.skillName}
+                    {availableSkills.map((item) => (
+                      <option key={item.id} value={item.id}>
+                        {item.name}
                       </option>
                     ))}
                   </select>

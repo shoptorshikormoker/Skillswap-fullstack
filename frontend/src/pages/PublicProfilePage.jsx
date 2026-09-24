@@ -125,7 +125,6 @@ function PublicProfilePage() {
         <ExchangeRequestForm
           receiverId={userId}
           receiverName={profile.name}
-          receiverSkills={userSkills}
           onClose={() => setShowRequestForm(false)}
         />
       )}
