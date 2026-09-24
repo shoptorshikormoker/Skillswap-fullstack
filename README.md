@@ -121,7 +121,7 @@ npm run build
 
 ## Current progress
 
-Milestones 1 through 4 are complete, and Milestone 5 search has been manually verified. Milestone 6 exchange requests are implemented and ready for a two-account manual workflow check. Users can manage their profiles and skills, find matching partners, send reciprocal skill-exchange requests, and accept, reject, or cancel pending requests.
+Milestones 1 through 7 are complete. Users can manage their profiles and skills, find matching partners, complete the exchange-request workflow, and schedule, update, complete, or cancel learning sessions.
 
 ## Authentication pages and API
 
@@ -232,3 +232,37 @@ Manual two-account check:
 3. Sign in as user A, open user B's public profile, and send a request.
 4. Sign in as user B, open **Requests**, and accept or decline it.
 5. Confirm the new status under user A's **Sent** tab. Also verify that self-requests, duplicate pending requests, and actions by the wrong participant are rejected.
+
+## Learning sessions
+
+Authenticated users can view and schedule sessions at:
+
+```text
+http://localhost:5173/sessions
+http://localhost:5173/sessions/new
+```
+
+Either participant can schedule one learning session after an exchange is accepted. Both participants can view it, update its future date and meeting details, complete it after the scheduled time, or cancel it. Completing a session also changes its exchange request to `COMPLETED`.
+
+Backend endpoints:
+
+```text
+POST /api/sessions
+GET  /api/sessions
+GET  /api/sessions/{id}
+PUT  /api/sessions/{id}
+POST /api/sessions/{id}/complete
+POST /api/sessions/{id}/cancel
+```
+
+Dates use a local ISO date-time such as `2026-09-25T15:30:00`. The browser's `datetime-local` field and the backend `LocalDateTime` value intentionally preserve the user's local wall-clock time for this first version. Session creation and updates reject past times, and completion is unavailable before the scheduled time.
+
+Manual two-account check:
+
+1. Create and accept an exchange request between two accounts.
+2. Open **Requests** and choose **Schedule session**, then enter a future date and optional meeting details.
+3. Sign in as the other participant and confirm the session appears under **Sessions**.
+4. Update its time, link, location, or agenda and confirm both accounts see the changes.
+5. Verify completion is blocked before the scheduled time, then complete it after that time.
+6. Schedule another accepted exchange, cancel its session, and confirm completed/cancelled sessions appear in history.
+7. Verify a third account cannot read or modify either session.

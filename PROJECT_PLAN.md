@@ -847,7 +847,7 @@ Checklist meaning:
 - [x] Add search loading, empty, and error states
 - [x] Add restrained result-card entrance and hover animations
 - [x] Manually verify search and filters
-- [ ] Update the README and commit the search milestone
+- [x] Update the README and commit the search milestone
 
 ### Milestone 6 - Exchange requests
 
@@ -864,15 +864,15 @@ Checklist meaning:
 
 ### Milestone 7 - Learning sessions
 
-- [ ] Create the learning-session entity and status enum
-- [ ] Create session DTOs, repository, service, and controller
-- [ ] Allow session creation only for accepted exchanges
-- [ ] Implement schedule, update, complete, and cancel rules
-- [ ] Build the session form and details page
-- [ ] Build upcoming and completed session views
-- [ ] Handle date and time values correctly
-- [ ] Manually verify session rules using two accounts
-- [ ] Update the README and commit the session milestone
+- [x] Create the learning-session entity and status enum
+- [x] Create session DTOs, repository, service, and controller
+- [x] Allow session creation only for accepted exchanges
+- [x] Implement schedule, update, complete, and cancel rules
+- [x] Build the session form and details page
+- [x] Build upcoming and completed session views
+- [x] Handle date and time values correctly
+- [x] Manually verify session rules using two accounts
+- [x] Update the README and commit the session milestone
 
 ### Milestone 8 - Video meetings
 

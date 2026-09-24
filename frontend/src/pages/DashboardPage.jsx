@@ -15,6 +15,7 @@ function DashboardPage() {
           <Link to="/search">Find partners</Link>
           <Link to="/skills">My skills</Link>
           <Link to="/exchanges">Requests</Link>
+          <Link to="/sessions">Sessions</Link>
           <Link to="/profile/edit">Profile</Link>
           <button type="button" onClick={logout}>
             Log out
@@ -74,6 +75,13 @@ function DashboardPage() {
             />
             <DashboardAction
               number="04"
+              title="Learning sessions"
+              description="Schedule an accepted exchange and review upcoming meetings."
+              to="/sessions"
+              accent="blue"
+            />
+            <DashboardAction
+              number="05"
               title="Improve profile"
               description="Share your bio, location, availability, and profile photo."
               to="/profile/edit"

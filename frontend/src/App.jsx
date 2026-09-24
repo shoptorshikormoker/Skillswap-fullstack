@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import ProtectedRoute from './components/ProtectedRoute'
 import { AuthProvider } from './context/AuthProvider'
 import DashboardPage from './pages/DashboardPage'
+import CreateSessionPage from './pages/CreateSessionPage'
 import EditProfilePage from './pages/EditProfilePage'
 import ExchangeRequestsPage from './pages/ExchangeRequestsPage'
 import HomePage from './pages/HomePage'
@@ -10,6 +11,8 @@ import MySkillsPage from './pages/MySkillsPage'
 import PublicProfilePage from './pages/PublicProfilePage'
 import RegisterPage from './pages/RegisterPage'
 import SearchPage from './pages/SearchPage'
+import SessionDetailsPage from './pages/SessionDetailsPage'
+import SessionsPage from './pages/SessionsPage'
 
 function App() {
   return (
@@ -42,6 +45,30 @@ function App() {
             element={
               <ProtectedRoute>
                 <ExchangeRequestsPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/sessions"
+            element={
+              <ProtectedRoute>
+                <SessionsPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/sessions/new"
+            element={
+              <ProtectedRoute>
+                <CreateSessionPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/sessions/:sessionId"
+            element={
+              <ProtectedRoute>
+                <SessionDetailsPage />
               </ProtectedRoute>
             }
           />

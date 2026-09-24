@@ -171,6 +171,16 @@ function RequestCard({ request, tab, busy, onAction }) {
           )}
         </div>
       )}
+      {request.status === 'ACCEPTED' && (
+        <div className="request-card__actions">
+          <Link className="button button--primary" to={`/sessions/new?exchangeId=${request.id}`}>
+            Schedule session
+          </Link>
+          <Link className="button button--secondary" to="/sessions">
+            View sessions
+          </Link>
+        </div>
+      )}
     </article>
   )
 }
