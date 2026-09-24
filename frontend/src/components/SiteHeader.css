@@ -4,6 +4,32 @@
   background: var(--color-background);
 }
 
+.site-header--landing {
+  background:
+    radial-gradient(circle at 8% 100%, rgba(23, 105, 224, 0.08), transparent 28rem),
+    #fff;
+}
+
+.site-header--landing .site-header__nav {
+  min-height: 74px;
+}
+
+.site-header--landing .site-header__links {
+  gap: 8px;
+}
+
+.site-header--landing .site-header__links > a:not(.site-header__signup) {
+  color: #344054;
+}
+
+.site-header--landing .site-header__links > a:not(.site-header__signup):hover {
+  color: var(--color-primary-dark);
+}
+
+.site-header--auth {
+  background: #f7f9fc;
+}
+
 .site-header__nav {
   min-height: 68px;
   display: flex;

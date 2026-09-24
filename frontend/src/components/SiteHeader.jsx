@@ -11,6 +11,9 @@ function SiteHeader() {
   const location = useLocation()
   const navigate = useNavigate()
   const [counts, setCounts] = useState({ requests: 0, sessions: 0 })
+  const isLanding = location.pathname === '/'
+  const isAuthPage = ['/login', '/register'].includes(location.pathname)
+  const variant = isLanding ? 'landing' : isAuthPage ? 'auth' : 'workspace'
 
   useEffect(() => {
     if (!user) return
@@ -35,11 +38,29 @@ function SiteHeader() {
   }
 
   return (
-    <header className="site-header">
+    <header className={`site-header site-header--${variant}`}>
       <nav className="site-header__nav container" aria-label="Main navigation">
         <BrandLogo className="site-header__brand" />
         <div className="site-header__links">
-          {user ? (
+          {isLanding ? (
+            <>
+              <a href="#discover">Discover</a>
+              <a href="#how-it-works">How it works</a>
+              <Link to="/search">Find partners</Link>
+              {user ? (
+                <Link className="site-header__signup" to="/dashboard">
+                  Dashboard
+                </Link>
+              ) : (
+                <>
+                  <Link to="/login">Log in</Link>
+                  <Link className="site-header__signup" to="/register">
+                    Create account
+                  </Link>
+                </>
+              )}
+            </>
+          ) : user ? (
             <>
               <HeaderLink to="/dashboard" active={isActive('/dashboard')}>
                 Overview
