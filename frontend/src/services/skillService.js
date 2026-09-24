@@ -5,6 +5,11 @@ export async function getCategories() {
   return response.data
 }
 
+export async function getSkills() {
+  const response = await api.get('/skills')
+  return response.data
+}
+
 export async function getMySkills() {
   const response = await api.get('/user-skills/me')
   return response.data

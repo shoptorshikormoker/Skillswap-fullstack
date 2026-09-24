@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import ProfileResultCard from '../components/ProfileResultCard'
 import { useAuth } from '../context/authContext'
-import { getCategories } from '../services/skillService'
+import { getCategories, getSkills } from '../services/skillService'
 import { searchSkillPartners } from '../services/searchService'
 import './SearchPage.css'
 
@@ -13,15 +13,17 @@ function SearchPage() {
   const [skill, setSkill] = useState(initialSkill)
   const [selectedCategory, setSelectedCategory] = useState('')
   const [categories, setCategories] = useState([])
+  const [availableSkills, setAvailableSkills] = useState([])
   const [results, setResults] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [hasSearched, setHasSearched] = useState(false)
 
   useEffect(() => {
-    Promise.all([getCategories(), searchSkillPartners(initialSkill, '')])
-      .then(([categoryData, resultData]) => {
+    Promise.all([getCategories(), getSkills(), searchSkillPartners(initialSkill, '')])
+      .then(([categoryData, skillData, resultData]) => {
         setCategories(categoryData)
+        setAvailableSkills(skillData)
         setResults(resultData)
         setHasSearched(true)
       })
@@ -51,6 +53,11 @@ function SearchPage() {
   function chooseCategory(categoryId) {
     setSelectedCategory(categoryId)
     executeSearch(skill, categoryId)
+  }
+
+  function chooseSkill(skillName) {
+    setSkill(skillName)
+    executeSearch(skillName, selectedCategory)
   }
 
   function clearFilters() {
@@ -87,12 +94,40 @@ function SearchPage() {
                   value={skill}
                   onChange={(event) => setSkill(event.target.value)}
                   placeholder="Try Java, photography, or English"
+                  list="available-skill-options"
+                  autoComplete="off"
                 />
+                <datalist id="available-skill-options">
+                  {availableSkills.map((availableSkill) => (
+                    <option key={availableSkill.id} value={availableSkill.name} />
+                  ))}
+                </datalist>
                 <button className="button button--primary" type="submit" disabled={loading}>
                   {loading ? 'Searching...' : 'Search partners'}
                 </button>
               </div>
             </form>
+
+            <div className="skill-suggestions" aria-label="Available skills">
+              <span>Available skills:</span>
+              <div>
+                {availableSkills
+                  .filter(
+                    (availableSkill) =>
+                      !selectedCategory || String(availableSkill.categoryId) === selectedCategory,
+                  )
+                  .map((availableSkill) => (
+                    <button
+                      key={availableSkill.id}
+                      type="button"
+                      className={skill === availableSkill.name ? 'is-active' : ''}
+                      onClick={() => chooseSkill(availableSkill.name)}
+                    >
+                      {availableSkill.name}
+                    </button>
+                  ))}
+              </div>
+            </div>
 
             <div className="category-filter" aria-label="Filter by category">
               <button
@@ -171,6 +206,9 @@ function SearchPage() {
           <div className="search-state">
             <h3>No matching skill partners yet.</h3>
             <p>Try another skill name or select a different category.</p>
+            <small>
+              The skill exists in the catalog, but a member must add it as TEACH to appear here.
+            </small>
             <button className="button button--secondary" type="button" onClick={clearFilters}>
               Clear filters
             </button>
