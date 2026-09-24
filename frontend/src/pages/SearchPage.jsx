@@ -1,14 +1,12 @@
 import { useEffect, useState } from 'react'
-import { Link, useSearchParams } from 'react-router-dom'
-import BrandLogo from '../components/BrandLogo'
+import { useSearchParams } from 'react-router-dom'
+import SiteHeader from '../components/SiteHeader'
 import ProfileResultCard from '../components/ProfileResultCard'
-import { useAuth } from '../context/authContext'
 import { getCategories, getSkills } from '../services/skillService'
 import { searchSkillPartners } from '../services/searchService'
 import './SearchPage.css'
 
 function SearchPage() {
-  const { user } = useAuth()
   const [searchParams] = useSearchParams()
   const initialSkill = searchParams.get('skill') || ''
   const [skill, setSkill] = useState(initialSkill)
@@ -70,13 +68,7 @@ function SearchPage() {
 
   return (
     <main className="search-page">
-      <nav className="navbar container" aria-label="Search navigation">
-        <BrandLogo />
-        <div className="workspace-nav__links">
-          <Link to="/">Home</Link>
-          <Link to={user ? '/dashboard' : '/login'}>{user ? 'Dashboard' : 'Log in'}</Link>
-        </div>
-      </nav>
+      <SiteHeader />
 
       <section className="search-hero">
         <div className="search-hero__layout container fade-up">

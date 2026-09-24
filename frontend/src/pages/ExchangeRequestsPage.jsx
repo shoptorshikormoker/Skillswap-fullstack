@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import BrandLogo from '../components/BrandLogo'
+import SiteHeader from '../components/SiteHeader'
 import {
   getReceivedRequests,
   getSentRequests,
@@ -41,13 +41,7 @@ function ExchangeRequestsPage() {
   const visible = requests[tab]
   return (
     <main className="requests-page">
-      <nav className="navbar container" aria-label="Exchange request navigation">
-        <BrandLogo />
-        <div className="workspace-nav__links">
-          <Link to="/dashboard">Dashboard</Link>
-          <Link to="/search">Find partners</Link>
-        </div>
-      </nav>
+      <SiteHeader />
       <div className="requests-shell container fade-up">
         <header className="requests-heading">
           <div>

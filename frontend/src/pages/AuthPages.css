@@ -1,5 +1,10 @@
-.auth-page {
+.auth-screen {
   min-height: 100vh;
+  background: #f7f9fc;
+}
+
+.auth-page {
+  min-height: calc(100vh - 79px);
   display: grid;
   grid-template-columns: minmax(360px, 0.85fr) minmax(480px, 1.15fr);
   background: #f7f9fc;

@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import BrandLogo from '../components/BrandLogo'
+import SiteHeader from '../components/SiteHeader'
 import { useAuth } from '../context/authContext'
 import { getReceivedRequests } from '../services/exchangeService'
 import { getSessions } from '../services/sessionService'
 import './DashboardPage.css'
 
 function DashboardPage() {
-  const { user, logout } = useAuth()
+  const { user } = useAuth()
   const [counts, setCounts] = useState({ requests: 0, sessions: 0 })
 
   useEffect(() => {
@@ -23,28 +23,7 @@ function DashboardPage() {
 
   return (
     <main className="dashboard-page">
-      <header className="dashboard-header">
-        <nav className="navbar dashboard-navbar container" aria-label="Dashboard navigation">
-          <BrandLogo className="dashboard-brand" />
-          <div className="workspace-nav__links">
-            <Link className="is-active" to="/dashboard" aria-current="page">
-              Overview
-            </Link>
-            <Link to="/search">Find partners</Link>
-            <Link to="/skills">My skills</Link>
-            <Link to="/exchanges">
-              Requests <NavBadge count={counts.requests} label="pending requests" />
-            </Link>
-            <Link to="/sessions">
-              Sessions <NavBadge count={counts.sessions} label="scheduled sessions" />
-            </Link>
-            <Link to="/profile/edit">Profile</Link>
-            <button className="dashboard-logout" type="button" onClick={logout}>
-              Log out
-            </button>
-          </div>
-        </nav>
-      </header>
+      <SiteHeader />
 
       <div className="dashboard-shell container">
         <section className="dashboard-hero fade-up">
@@ -144,15 +123,6 @@ function DashboardPage() {
         </section>
       </div>
     </main>
-  )
-}
-
-function NavBadge({ count, label }) {
-  if (!count) return null
-  return (
-    <span className="nav-count" aria-label={`${count} ${label}`}>
-      {count > 99 ? '99+' : count}
-    </span>
   )
 }
 

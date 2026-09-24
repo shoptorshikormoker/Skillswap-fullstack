@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import BrandLogo from '../components/BrandLogo'
+import SiteHeader from '../components/SiteHeader'
 import SkillCard from '../components/SkillCard'
 import ExchangeRequestForm from '../components/ExchangeRequestForm'
 import { useAuth } from '../context/authContext'
@@ -51,13 +51,7 @@ function PublicProfilePage() {
 
   return (
     <main className="profile-page">
-      <nav className="navbar container" aria-label="Profile navigation">
-        <BrandLogo />
-        <div className="workspace-nav__links">
-          <Link to="/">Home</Link>
-          <Link to="/search">Find partners</Link>
-        </div>
-      </nav>
+      <SiteHeader />
 
       <section className="public-profile container fade-up">
         <header className="public-profile__header">

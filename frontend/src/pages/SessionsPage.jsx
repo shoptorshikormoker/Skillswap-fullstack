@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import BrandLogo from '../components/BrandLogo'
+import SiteHeader from '../components/SiteHeader'
 import { getSessions } from '../services/sessionService'
 import './SessionsPages.css'
 
@@ -117,16 +117,7 @@ function SessionCard({ session }) {
 }
 
 export function SessionNav() {
-  return (
-    <nav className="navbar container" aria-label="Session navigation">
-      <BrandLogo />
-      <div className="workspace-nav__links">
-        <Link to="/dashboard">Dashboard</Link>
-        <Link to="/exchanges">Requests</Link>
-        <Link to="/sessions">Sessions</Link>
-      </div>
-    </nav>
-  )
+  return <SiteHeader />
 }
 
 export default SessionsPage

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import BrandLogo from '../components/BrandLogo'
+import SiteHeader from '../components/SiteHeader'
 import { useAuth } from '../context/authContext'
 import { getMyProfile, updateMyProfile } from '../services/profileService'
 import './ProfilePages.css'
@@ -90,14 +90,7 @@ function EditProfilePage() {
 
   return (
     <main className="profile-page">
-      <nav className="navbar container" aria-label="Profile navigation">
-        <BrandLogo />
-        <div className="workspace-nav__links">
-          <Link to="/dashboard">Dashboard</Link>
-          <Link to="/skills">My skills</Link>
-          <Link to="/search">Find partners</Link>
-        </div>
-      </nav>
+      <SiteHeader />
 
       <section className="profile-editor container fade-up">
         <aside className="profile-editor__heading">

@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import BrandLogo from '../components/BrandLogo'
+import SiteHeader from '../components/SiteHeader'
 import { useAuth } from '../context/authContext'
 import './HomePage.css'
 
@@ -62,30 +63,7 @@ function HomePage() {
 
   return (
     <main className="home-page">
-      <nav className="navbar home-navbar container" aria-label="Main navigation">
-        <BrandLogo />
-        <div className="home-navbar__links">
-          <a href="#discover">Discover</a>
-          <a href="#how-it-works">How it works</a>
-          <Link to="/search">Find partners</Link>
-        </div>
-        <div className="navbar__actions">
-          {user ? (
-            <Link className="button button--primary navbar__register" to="/dashboard">
-              Dashboard
-            </Link>
-          ) : (
-            <>
-              <Link className="navbar__login" to="/login">
-                Log in
-              </Link>
-              <Link className="button button--primary navbar__register" to="/register">
-                Join SkillSwap
-              </Link>
-            </>
-          )}
-        </div>
-      </nav>
+      <SiteHeader />
 
       <section className="home-hero container">
         <div className="home-hero__content">

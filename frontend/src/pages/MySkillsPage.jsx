@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Link } from 'react-router-dom'
-import BrandLogo from '../components/BrandLogo'
+import SiteHeader from '../components/SiteHeader'
 import SkillCard from '../components/SkillCard'
 import {
   addMySkill,
@@ -119,14 +118,7 @@ function MySkillsPage() {
 
   return (
     <main className="skills-page">
-      <nav className="navbar container" aria-label="Skills navigation">
-        <BrandLogo />
-        <div className="workspace-nav__links">
-          <Link to="/dashboard">Dashboard</Link>
-          <Link to="/search">Find partners</Link>
-          <Link to="/profile/edit">Profile</Link>
-        </div>
-      </nav>
+      <SiteHeader />
 
       <section className="skills-layout container fade-up">
         <aside className="skill-form-panel">
