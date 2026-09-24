@@ -17,15 +17,10 @@ function ExchangeRequestForm({ receiverId, receiverName, receiverSkills, onClose
       .finally(() => setLoading(false))
   }, [])
 
-  const receiverLearns = new Set(
-    receiverSkills.filter((item) => item.skillType === 'LEARN').map((item) => item.skillId),
-  )
   const receiverTeaches = new Set(
     receiverSkills.filter((item) => item.skillType === 'TEACH').map((item) => item.skillId),
   )
-  const offeredOptions = mySkills.filter(
-    (item) => item.skillType === 'TEACH' && receiverLearns.has(item.skillId),
-  )
+  const offeredOptions = mySkills.filter((item) => item.skillType === 'TEACH')
   const wantedOptions = mySkills.filter(
     (item) => item.skillType === 'LEARN' && receiverTeaches.has(item.skillId),
   )
@@ -80,13 +75,13 @@ function ExchangeRequestForm({ receiverId, receiverName, receiverSkills, onClose
           <form onSubmit={submit}>
             <p className="eyebrow">Start an exchange</p>
             <h2 id="request-title">Send a request to {receiverName}</h2>
-            <p>Choose a reciprocal match from both skill profiles.</p>
+            <p>Offer one of your teaching skills and choose a skill this member teaches.</p>
             {loading ? (
               <p>Loading skill matches...</p>
             ) : !canExchange ? (
               <div className="request-warning">
-                There is no reciprocal skill match yet. Add matching share and learn skills to your
-                profile first.
+                You need at least one teaching skill, plus a learning skill that this member
+                teaches. Update your skills and try again.
               </div>
             ) : (
               <div className="request-fields">

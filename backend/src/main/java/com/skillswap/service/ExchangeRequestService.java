@@ -58,11 +58,6 @@ public class ExchangeRequestService {
                 sender.getId(), wanted.getId(), SkillType.LEARN, "You can only request a skill from your learn list.");
         requireUserSkill(
                 receiver.getId(), wanted.getId(), SkillType.TEACH, "This member does not share the requested skill.");
-        requireUserSkill(
-                receiver.getId(),
-                offered.getId(),
-                SkillType.LEARN,
-                "This member is not looking to learn the offered skill.");
         if (exchangeRepository.existsBySenderIdAndReceiverIdAndOfferedSkillIdAndWantedSkillIdAndStatus(
                 sender.getId(), receiver.getId(), offered.getId(), wanted.getId(), ExchangeRequestStatus.PENDING)) {
             throw new BadRequestException("A matching pending request already exists.");
