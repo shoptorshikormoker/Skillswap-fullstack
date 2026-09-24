@@ -23,23 +23,28 @@ function DashboardPage() {
 
   return (
     <main className="dashboard-page">
-      <nav className="navbar dashboard-navbar container" aria-label="Dashboard navigation">
-        <BrandLogo />
-        <div className="workspace-nav__links">
-          <Link to="/search">Find partners</Link>
-          <Link to="/skills">My skills</Link>
-          <Link to="/exchanges">
-            Requests <NavBadge count={counts.requests} label="pending requests" />
-          </Link>
-          <Link to="/sessions">
-            Sessions <NavBadge count={counts.sessions} label="scheduled sessions" />
-          </Link>
-          <Link to="/profile/edit">Profile</Link>
-          <button type="button" onClick={logout}>
-            Log out
-          </button>
-        </div>
-      </nav>
+      <header className="dashboard-header">
+        <nav className="navbar dashboard-navbar container" aria-label="Dashboard navigation">
+          <BrandLogo className="dashboard-brand" />
+          <div className="workspace-nav__links">
+            <Link className="is-active" to="/dashboard" aria-current="page">
+              Overview
+            </Link>
+            <Link to="/search">Find partners</Link>
+            <Link to="/skills">My skills</Link>
+            <Link to="/exchanges">
+              Requests <NavBadge count={counts.requests} label="pending requests" />
+            </Link>
+            <Link to="/sessions">
+              Sessions <NavBadge count={counts.sessions} label="scheduled sessions" />
+            </Link>
+            <Link to="/profile/edit">Profile</Link>
+            <button className="dashboard-logout" type="button" onClick={logout}>
+              Log out
+            </button>
+          </div>
+        </nav>
+      </header>
 
       <div className="dashboard-shell container">
         <section className="dashboard-hero fade-up">
