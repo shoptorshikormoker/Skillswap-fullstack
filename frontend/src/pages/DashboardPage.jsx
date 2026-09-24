@@ -14,6 +14,7 @@ function DashboardPage() {
         <div className="workspace-nav__links">
           <Link to="/search">Find partners</Link>
           <Link to="/skills">My skills</Link>
+          <Link to="/exchanges">Requests</Link>
           <Link to="/profile/edit">Profile</Link>
           <button type="button" onClick={logout}>
             Log out
@@ -66,6 +67,13 @@ function DashboardPage() {
             />
             <DashboardAction
               number="03"
+              title="Exchange requests"
+              description="Review received invitations and requests you have sent."
+              to="/exchanges"
+              accent="orange"
+            />
+            <DashboardAction
+              number="04"
               title="Improve profile"
               description="Share your bio, location, availability, and profile photo."
               to="/profile/edit"

@@ -1,16 +1,20 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import SkillCard from '../components/SkillCard'
+import ExchangeRequestForm from '../components/ExchangeRequestForm'
+import { useAuth } from '../context/authContext'
 import { getPublicProfile } from '../services/profileService'
 import { getUserSkills } from '../services/skillService'
 import './ProfilePages.css'
 
 function PublicProfilePage() {
   const { userId } = useParams()
+  const { user } = useAuth()
   const [profile, setProfile] = useState(null)
   const [userSkills, setUserSkills] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
+  const [showRequestForm, setShowRequestForm] = useState(false)
 
   useEffect(() => {
     Promise.all([getPublicProfile(userId), getUserSkills(userId)])
@@ -70,6 +74,15 @@ function PublicProfilePage() {
             <h1>{profile.name}</h1>
             {profile.location && <p className="profile-location">{profile.location}</p>}
           </div>
+          {user && String(user.id) !== String(userId) && (
+            <button
+              className="button button--primary public-profile__request"
+              type="button"
+              onClick={() => setShowRequestForm(true)}
+            >
+              Request an exchange
+            </button>
+          )}
         </header>
 
         {profile.completed ? (
@@ -108,6 +121,14 @@ function PublicProfilePage() {
           )}
         </section>
       </section>
+      {showRequestForm && (
+        <ExchangeRequestForm
+          receiverId={userId}
+          receiverName={profile.name}
+          receiverSkills={userSkills}
+          onClose={() => setShowRequestForm(false)}
+        />
+      )}
     </main>
   )
 }

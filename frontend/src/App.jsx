@@ -3,6 +3,7 @@ import ProtectedRoute from './components/ProtectedRoute'
 import { AuthProvider } from './context/AuthProvider'
 import DashboardPage from './pages/DashboardPage'
 import EditProfilePage from './pages/EditProfilePage'
+import ExchangeRequestsPage from './pages/ExchangeRequestsPage'
 import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
 import MySkillsPage from './pages/MySkillsPage'
@@ -33,6 +34,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <EditProfilePage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/exchanges"
+            element={
+              <ProtectedRoute>
+                <ExchangeRequestsPage />
               </ProtectedRoute>
             }
           />

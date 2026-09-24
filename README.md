@@ -121,7 +121,7 @@ npm run build
 
 ## Current progress
 
-Milestones 1 through 4 are complete. Milestone 5 search is implemented and manually verified, and is awaiting final UI review and commit. Users can manage their profiles and skills, find skill partners by shared skill or category, and open public profile pages from the results.
+Milestones 1 through 4 are complete, and Milestone 5 search has been manually verified. Milestone 6 exchange requests are implemented and ready for a two-account manual workflow check. Users can manage their profiles and skills, find matching partners, send reciprocal skill-exchange requests, and accept, reject, or cancel pending requests.
 
 ## Authentication pages and API
 
@@ -201,3 +201,34 @@ GET /api/search
 ```
 
 The public endpoint accepts optional `skill` and `categoryId` query parameters. It returns skill partners who share matching skills, supports partial and case-insensitive skill names, and groups each user's matching skills into one result card. Each card links to that user's public profile. When a logged-in user searches, their own profile is excluded from the results.
+
+## Exchange requests
+
+Authenticated users can open their request workspace at:
+
+```text
+http://localhost:5173/exchanges
+```
+
+An exchange can be requested from another member's public profile when both profiles have reciprocal skills: the sender shares something the recipient wants to learn, and the recipient shares something the sender wants to learn.
+
+Backend endpoints:
+
+```text
+POST /api/exchange-requests
+GET  /api/exchange-requests/received
+GET  /api/exchange-requests/sent
+POST /api/exchange-requests/{id}/accept
+POST /api/exchange-requests/{id}/reject
+POST /api/exchange-requests/{id}/cancel
+```
+
+Only the receiver can accept or reject a pending request, and only the sender can cancel it. Each event creates a stored notification for the other participant. Notification list and read-state endpoints are planned for Milestone 10.
+
+Manual two-account check:
+
+1. Give user A a `TEACH` skill that user B has as `LEARN`.
+2. Give user B a `TEACH` skill that user A has as `LEARN`.
+3. Sign in as user A, open user B's public profile, and send a request.
+4. Sign in as user B, open **Requests**, and accept or decline it.
+5. Confirm the new status under user A's **Sent** tab. Also verify that self-requests, duplicate pending requests, and actions by the wrong participant are rejected.

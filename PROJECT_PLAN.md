@@ -851,16 +851,16 @@ Checklist meaning:
 
 ### Milestone 6 - Exchange requests
 
-- [ ] Create the exchange-request entity and status enum
-- [ ] Create exchange-request DTOs, repository, service, and controller
-- [ ] Prevent users from sending requests to themselves
-- [ ] Implement send, accept, reject, and cancel rules
-- [ ] Build the exchange-request form
-- [ ] Build Received and Sent request tabs
-- [ ] Add readable request status badges
-- [ ] Create stored notifications for request events
-- [ ] Manually verify the workflow using two accounts
-- [ ] Update the README and commit the exchange milestone
+- [x] Create the exchange-request entity and status enum
+- [x] Create exchange-request DTOs, repository, service, and controller
+- [x] Prevent users from sending requests to themselves
+- [x] Implement send, accept, reject, and cancel rules
+- [x] Build the exchange-request form
+- [x] Build Received and Sent request tabs
+- [x] Add readable request status badges
+- [x] Create stored notifications for request events
+- [x] Manually verify the workflow using two accounts
+- [x] Update the README and commit the exchange milestone
 
 ### Milestone 7 - Learning sessions
 
