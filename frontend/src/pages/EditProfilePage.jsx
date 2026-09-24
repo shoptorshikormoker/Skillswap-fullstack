@@ -13,7 +13,7 @@ const emptyForm = {
 }
 
 function EditProfilePage() {
-  const { updateUserName } = useAuth()
+  const { user, updateUserName } = useAuth()
   const [formData, setFormData] = useState(emptyForm)
   const [loading, setLoading] = useState(true)
   const [submitting, setSubmitting] = useState(false)
@@ -81,6 +81,12 @@ function EditProfilePage() {
     )
   }
 
+  const completedFields = ['name', 'bio', 'location', 'availability'].filter(
+    (field) => formData[field].trim().length > 0,
+  ).length
+  const completion = Math.round((completedFields / 4) * 100)
+  const previewInitial = (formData.name || user.name).charAt(0).toUpperCase()
+
   return (
     <main className="profile-page">
       <nav className="navbar container" aria-label="Profile navigation">
@@ -95,11 +101,37 @@ function EditProfilePage() {
       </nav>
 
       <section className="profile-editor container fade-up">
-        <div className="profile-editor__heading">
+        <aside className="profile-editor__heading">
           <p className="eyebrow">Your public introduction</p>
           <h1>Edit your profile</h1>
           <p>Help future skill partners understand who you are and when you are available.</p>
-        </div>
+          <div className="profile-preview">
+            {formData.photoUrl ? (
+              <img src={formData.photoUrl} alt="Profile preview" />
+            ) : (
+              <span className="profile-preview__avatar" aria-hidden="true">
+                {previewInitial}
+              </span>
+            )}
+            <div>
+              <strong>{formData.name || 'Your name'}</strong>
+              <small>{formData.location || 'Add your location'}</small>
+            </div>
+          </div>
+          <div className="profile-completion">
+            <div>
+              <span>Profile completion</span>
+              <strong>{completion}%</strong>
+            </div>
+            <progress value={completion} max="100">
+              {completion}%
+            </progress>
+            <small>Add your name, bio, location, and availability.</small>
+          </div>
+          <Link className="profile-public-link" to={`/profiles/${user.id}`}>
+            Preview public profile &rarr;
+          </Link>
+        </aside>
 
         <form className="profile-form" onSubmit={handleSubmit} noValidate>
           {message && (

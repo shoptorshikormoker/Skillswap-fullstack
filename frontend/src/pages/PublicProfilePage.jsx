@@ -73,6 +73,14 @@ function PublicProfilePage() {
             <p className="eyebrow">SkillSwap member</p>
             <h1>{profile.name}</h1>
             {profile.location && <p className="profile-location">{profile.location}</p>}
+            <div className="profile-skill-counts" aria-label="Skill summary">
+              <span>
+                <strong>{sharedSkills.length}</strong> skills shared
+              </span>
+              <span>
+                <strong>{learnSkills.length}</strong> learning goals
+              </span>
+            </div>
           </div>
           {user && String(user.id) !== String(userId) && (
             <button
@@ -88,11 +96,15 @@ function PublicProfilePage() {
         {profile.completed ? (
           <div className="profile-details">
             <article>
-              <span>About</span>
+              <span className="profile-detail-label">
+                <b aria-hidden="true">01</b> About
+              </span>
               <p>{profile.bio || 'No biography has been added yet.'}</p>
             </article>
             <article>
-              <span>Availability</span>
+              <span className="profile-detail-label">
+                <b aria-hidden="true">02</b> Availability
+              </span>
               <p>{profile.availability || 'Availability has not been added yet.'}</p>
             </article>
           </div>

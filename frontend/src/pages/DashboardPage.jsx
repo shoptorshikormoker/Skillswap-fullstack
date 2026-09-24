@@ -1,21 +1,40 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../context/authContext'
+import { getReceivedRequests } from '../services/exchangeService'
+import { getSessions } from '../services/sessionService'
 import './DashboardPage.css'
 
 function DashboardPage() {
   const { user, logout } = useAuth()
+  const [counts, setCounts] = useState({ requests: 0, sessions: 0 })
+
+  useEffect(() => {
+    Promise.all([getReceivedRequests(), getSessions()])
+      .then(([requests, sessions]) =>
+        setCounts({
+          requests: requests.filter((request) => request.status === 'PENDING').length,
+          sessions: sessions.filter((session) => session.status === 'SCHEDULED').length,
+        }),
+      )
+      .catch(() => undefined)
+  }, [])
 
   return (
     <main className="dashboard-page">
-      <nav className="navbar container" aria-label="Dashboard navigation">
+      <nav className="navbar dashboard-navbar container" aria-label="Dashboard navigation">
         <Link className="brand" to="/">
           Skill<span>Swap</span>
         </Link>
         <div className="workspace-nav__links">
           <Link to="/search">Find partners</Link>
           <Link to="/skills">My skills</Link>
-          <Link to="/exchanges">Requests</Link>
-          <Link to="/sessions">Sessions</Link>
+          <Link to="/exchanges">
+            Requests <NavBadge count={counts.requests} label="pending requests" />
+          </Link>
+          <Link to="/sessions">
+            Sessions <NavBadge count={counts.sessions} label="scheduled sessions" />
+          </Link>
           <Link to="/profile/edit">Profile</Link>
           <button type="button" onClick={logout}>
             Log out
@@ -72,6 +91,7 @@ function DashboardPage() {
               description="Review received invitations and requests you have sent."
               to="/exchanges"
               accent="orange"
+              badge={counts.requests}
             />
             <DashboardAction
               number="04"
@@ -79,6 +99,7 @@ function DashboardPage() {
               description="Schedule an accepted exchange and review upcoming meetings."
               to="/sessions"
               accent="blue"
+              badge={counts.sessions}
             />
             <DashboardAction
               number="05"
@@ -122,10 +143,20 @@ function DashboardPage() {
   )
 }
 
-function DashboardAction({ number, title, description, to, accent }) {
+function NavBadge({ count, label }) {
+  if (!count) return null
+  return (
+    <span className="nav-count" aria-label={`${count} ${label}`}>
+      {count > 99 ? '99+' : count}
+    </span>
+  )
+}
+
+function DashboardAction({ number, title, description, to, accent, badge }) {
   return (
     <Link className={`dashboard-action dashboard-action--${accent}`} to={to}>
       <span className="dashboard-action__number">{number}</span>
+      {badge > 0 && <span className="dashboard-action__badge">{badge}</span>}
       <h3>{title}</h3>
       <p>{description}</p>
       <strong>Open &rarr;</strong>
