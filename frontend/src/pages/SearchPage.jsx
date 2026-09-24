@@ -51,13 +51,14 @@ function SearchPage() {
   }
 
   function chooseCategory(categoryId) {
+    const selectedSkill = availableSkills.find((availableSkill) => availableSkill.name === skill)
+    const nextSkill =
+      categoryId && selectedSkill && String(selectedSkill.categoryId) !== String(categoryId)
+        ? ''
+        : skill
     setSelectedCategory(categoryId)
-    executeSearch(skill, categoryId)
-  }
-
-  function chooseSkill(skillName) {
-    setSkill(skillName)
-    executeSearch(skillName, selectedCategory)
+    setSkill(nextSkill)
+    executeSearch(nextSkill, categoryId)
   }
 
   function clearFilters() {
@@ -88,46 +89,28 @@ function SearchPage() {
             <form className="search-form" onSubmit={runSearch}>
               <label htmlFor="skill-search">What would you like to learn?</label>
               <div className="search-form__controls">
-                <input
+                <select
                   id="skill-search"
-                  type="search"
                   value={skill}
                   onChange={(event) => setSkill(event.target.value)}
-                  placeholder="Try Java, photography, or English"
-                  list="available-skill-options"
-                  autoComplete="off"
-                />
-                <datalist id="available-skill-options">
-                  {availableSkills.map((availableSkill) => (
-                    <option key={availableSkill.id} value={availableSkill.name} />
-                  ))}
-                </datalist>
+                >
+                  <option value="">All skills</option>
+                  {availableSkills
+                    .filter(
+                      (availableSkill) =>
+                        !selectedCategory || String(availableSkill.categoryId) === selectedCategory,
+                    )
+                    .map((availableSkill) => (
+                      <option key={availableSkill.id} value={availableSkill.name}>
+                        {availableSkill.name}
+                      </option>
+                    ))}
+                </select>
                 <button className="button button--primary" type="submit" disabled={loading}>
                   {loading ? 'Searching...' : 'Search partners'}
                 </button>
               </div>
             </form>
-
-            <div className="skill-suggestions" aria-label="Available skills">
-              <span>Available skills:</span>
-              <div>
-                {availableSkills
-                  .filter(
-                    (availableSkill) =>
-                      !selectedCategory || String(availableSkill.categoryId) === selectedCategory,
-                  )
-                  .map((availableSkill) => (
-                    <button
-                      key={availableSkill.id}
-                      type="button"
-                      className={skill === availableSkill.name ? 'is-active' : ''}
-                      onClick={() => chooseSkill(availableSkill.name)}
-                    >
-                      {availableSkill.name}
-                    </button>
-                  ))}
-              </div>
-            </div>
 
             <div className="category-filter" aria-label="Filter by category">
               <button
