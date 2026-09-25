@@ -45,6 +45,7 @@ public class ProfileService {
         profile.setBio(cleanOptionalText(request.bio()));
         profile.setLocation(cleanOptionalText(request.location()));
         profile.setPhotoUrl(cleanOptionalText(request.photoUrl()));
+        profile.setGender(request.gender());
         profile.setAvailability(cleanOptionalText(request.availability()));
 
         userRepository.save(user);

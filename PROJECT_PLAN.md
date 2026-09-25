@@ -223,7 +223,7 @@ Register or log in
 
 ### `profiles`
 
-- `id`, `user_id`, `bio`, `location`, `photo_url`, `availability`
+- `id`, `user_id`, `bio`, `location`, `photo_url`, `gender`, `availability`
 
 ### `categories`
 

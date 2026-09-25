@@ -61,6 +61,7 @@ public class SearchService {
                     profile == null ? null : profile.getBio(),
                     profile == null ? null : profile.getLocation(),
                     profile == null ? null : profile.getPhotoUrl(),
+                    profile == null ? null : profile.getGender(),
                     userMatches.stream()
                             .map(UserSkill::getSkill)
                             .map(SkillResponse::from)

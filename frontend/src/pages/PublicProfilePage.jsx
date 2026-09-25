@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import ProfileAvatar from '../components/ProfileAvatar'
 import SiteHeader from '../components/SiteHeader'
 import SkillCard from '../components/SkillCard'
 import ExchangeRequestForm from '../components/ExchangeRequestForm'
@@ -45,7 +46,6 @@ function PublicProfilePage() {
     )
   }
 
-  const initial = profile.name.charAt(0).toUpperCase()
   const sharedSkills = userSkills.filter((userSkill) => userSkill.skillType === 'TEACH')
   const learnSkills = userSkills.filter((userSkill) => userSkill.skillType === 'LEARN')
 
@@ -55,13 +55,7 @@ function PublicProfilePage() {
 
       <section className="public-profile container fade-up">
         <header className="public-profile__header">
-          {profile.photoUrl ? (
-            <img src={profile.photoUrl} alt={`${profile.name}'s profile`} />
-          ) : (
-            <div className="profile-avatar" aria-hidden="true">
-              {initial}
-            </div>
-          )}
+          <ProfileAvatar photoUrl={profile.photoUrl} gender={profile.gender} name={profile.name} />
           <div>
             <p className="eyebrow">SkillSwap member</p>
             <h1>{profile.name}</h1>

@@ -5,9 +5,7 @@
 }
 
 .site-header--landing {
-  background:
-    radial-gradient(circle at 8% 100%, rgba(23, 105, 224, 0.08), transparent 28rem),
-    #fff;
+  background: radial-gradient(circle at 8% 100%, rgba(23, 105, 224, 0.08), transparent 28rem), #fff;
 }
 
 .site-header--landing .site-header__nav {

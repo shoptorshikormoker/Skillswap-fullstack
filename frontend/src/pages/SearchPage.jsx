@@ -17,6 +17,20 @@ function SearchPage() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [hasSearched, setHasSearched] = useState(false)
+  const [suggestionsOpen, setSuggestionsOpen] = useState(false)
+  const [activeSuggestion, setActiveSuggestion] = useState(-1)
+
+  const normalizedSkill = skill.trim().toLowerCase()
+  const skillSuggestions =
+    normalizedSkill.length > 0
+      ? availableSkills
+          .filter(
+            (availableSkill) =>
+              (!selectedCategory || String(availableSkill.categoryId) === selectedCategory) &&
+              availableSkill.name.toLowerCase().includes(normalizedSkill),
+          )
+          .slice(0, 7)
+      : []
 
   useEffect(() => {
     Promise.all([getCategories(), getSkills(), searchSkillPartners(initialSkill, '')])
@@ -46,7 +60,33 @@ function SearchPage() {
 
   function runSearch(event) {
     event.preventDefault()
+    setSuggestionsOpen(false)
     executeSearch(skill, selectedCategory)
+  }
+
+  function selectSuggestion(suggestion) {
+    setSkill(suggestion.name)
+    setSuggestionsOpen(false)
+    setActiveSuggestion(-1)
+    executeSearch(suggestion.name, selectedCategory)
+  }
+
+  function handleSearchKeyDown(event) {
+    if (!suggestionsOpen || skillSuggestions.length === 0) return
+
+    if (event.key === 'ArrowDown') {
+      event.preventDefault()
+      setActiveSuggestion((current) => (current + 1) % skillSuggestions.length)
+    } else if (event.key === 'ArrowUp') {
+      event.preventDefault()
+      setActiveSuggestion((current) => (current <= 0 ? skillSuggestions.length - 1 : current - 1))
+    } else if (event.key === 'Enter' && activeSuggestion >= 0) {
+      event.preventDefault()
+      selectSuggestion(skillSuggestions[activeSuggestion])
+    } else if (event.key === 'Escape') {
+      setSuggestionsOpen(false)
+      setActiveSuggestion(-1)
+    }
   }
 
   function chooseCategory(categoryId) {
@@ -80,23 +120,48 @@ function SearchPage() {
             <form className="search-form" onSubmit={runSearch}>
               <label htmlFor="skill-search">What would you like to learn?</label>
               <div className="search-form__controls">
-                <select
-                  id="skill-search"
-                  value={skill}
-                  onChange={(event) => setSkill(event.target.value)}
-                >
-                  <option value="">All skills</option>
-                  {availableSkills
-                    .filter(
-                      (availableSkill) =>
-                        !selectedCategory || String(availableSkill.categoryId) === selectedCategory,
-                    )
-                    .map((availableSkill) => (
-                      <option key={availableSkill.id} value={availableSkill.name}>
-                        {availableSkill.name}
-                      </option>
-                    ))}
-                </select>
+                <div className="skill-autocomplete">
+                  <input
+                    type="search"
+                    id="skill-search"
+                    role="combobox"
+                    aria-autocomplete="list"
+                    aria-expanded={suggestionsOpen && skillSuggestions.length > 0}
+                    aria-controls="skill-suggestions"
+                    value={skill}
+                    onChange={(event) => {
+                      setSkill(event.target.value)
+                      setSuggestionsOpen(event.target.value.trim().length > 0)
+                      setActiveSuggestion(-1)
+                    }}
+                    onFocus={() => setSuggestionsOpen(normalizedSkill.length > 0)}
+                    onBlur={() => setSuggestionsOpen(false)}
+                    onKeyDown={handleSearchKeyDown}
+                    placeholder="Search skills, e.g. Java or English"
+                    autoComplete="off"
+                  />
+                  <span
+                    className={`skill-autocomplete__chevron ${suggestionsOpen ? 'is-open' : ''}`}
+                    aria-hidden="true"
+                  />
+                  {suggestionsOpen && skillSuggestions.length > 0 && (
+                    <ul className="skill-suggestions" id="skill-suggestions" role="listbox">
+                      {skillSuggestions.map((suggestion, index) => (
+                        <li
+                          className={index === activeSuggestion ? 'is-active' : ''}
+                          key={suggestion.id}
+                          role="option"
+                          aria-selected={index === activeSuggestion}
+                          onMouseDown={(event) => event.preventDefault()}
+                          onClick={() => selectSuggestion(suggestion)}
+                        >
+                          <span>{suggestion.name}</span>
+                          <small>Search skill</small>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
                 <button className="button button--primary" type="submit" disabled={loading}>
                   {loading ? 'Searching...' : 'Search partners'}
                 </button>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import ProfileAvatar from '../components/ProfileAvatar'
 import SiteHeader from '../components/SiteHeader'
 import { useAuth } from '../context/authContext'
 import { getMyProfile, updateMyProfile } from '../services/profileService'
@@ -10,6 +11,7 @@ const emptyForm = {
   bio: '',
   location: '',
   photoUrl: '',
+  gender: '',
   availability: '',
 }
 
@@ -30,6 +32,7 @@ function EditProfilePage() {
           bio: profile.bio || '',
           location: profile.location || '',
           photoUrl: profile.photoUrl || '',
+          gender: profile.gender || '',
           availability: profile.availability || '',
         }),
       )
@@ -54,6 +57,7 @@ function EditProfilePage() {
         bio: profile.bio || '',
         location: profile.location || '',
         photoUrl: profile.photoUrl || '',
+        gender: profile.gender || '',
         availability: profile.availability || '',
       })
       updateUserName(profile.name)
@@ -86,7 +90,6 @@ function EditProfilePage() {
     (field) => formData[field].trim().length > 0,
   ).length
   const completion = Math.round((completedFields / 4) * 100)
-  const previewInitial = (formData.name || user.name).charAt(0).toUpperCase()
 
   return (
     <main className="profile-page">
@@ -98,13 +101,11 @@ function EditProfilePage() {
           <h1>Edit your profile</h1>
           <p>Help future skill partners understand who you are and when you are available.</p>
           <div className="profile-preview">
-            {formData.photoUrl ? (
-              <img src={formData.photoUrl} alt="Profile preview" />
-            ) : (
-              <span className="profile-preview__avatar" aria-hidden="true">
-                {previewInitial}
-              </span>
-            )}
+            <ProfileAvatar
+              photoUrl={formData.photoUrl}
+              gender={formData.gender}
+              name={formData.name || user.name}
+            />
             <div>
               <strong>{formData.name || 'Your name'}</strong>
               <small>{formData.location || 'Add your location'}</small>
@@ -188,6 +189,20 @@ function EditProfilePage() {
               {errors.availability && <small>{errors.availability}</small>}
             </label>
           </div>
+
+          <label className="form-field">
+            <span>Gender</span>
+            <select name="gender" value={formData.gender} onChange={handleChange}>
+              <option value="">Select gender</option>
+              <option value="MALE">Male</option>
+              <option value="FEMALE">Female</option>
+              <option value="OTHER">Other</option>
+              <option value="PREFER_NOT_TO_SAY">Prefer not to say</option>
+            </select>
+            <small className="form-field__hint">
+              Used only to choose a default avatar when no photo is provided.
+            </small>
+          </label>
 
           <label className="form-field">
             <span>Profile photo URL</span>

@@ -1,7 +1,10 @@
 package com.skillswap.entity;
 
+import com.skillswap.enums.Gender;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -29,6 +32,10 @@ public class Profile {
 
     @Column(length = 500)
     private String photoUrl;
+
+    @Enumerated(EnumType.STRING)
+    @Column(length = 24)
+    private Gender gender;
 
     @Column(length = 200)
     private String availability;
@@ -67,6 +74,14 @@ public class Profile {
 
     public void setPhotoUrl(String photoUrl) {
         this.photoUrl = photoUrl;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
 
     public String getAvailability() {

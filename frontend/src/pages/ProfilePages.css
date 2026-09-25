@@ -159,7 +159,8 @@
   gap: 18px;
 }
 
-.profile-form textarea {
+.profile-form textarea,
+.profile-form select {
   width: 100%;
   padding: 12px 13px;
   resize: vertical;
@@ -170,7 +171,8 @@
   outline: none;
 }
 
-.profile-form textarea:focus {
+.profile-form textarea:focus,
+.profile-form select:focus {
   border-color: var(--color-primary);
   box-shadow: 0 0 0 3px rgba(23, 105, 224, 0.14);
 }
