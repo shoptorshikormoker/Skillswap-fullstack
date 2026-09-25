@@ -201,6 +201,17 @@ function MySkillsPage() {
             <span>{userSkills.length} total</span>
           </div>
 
+          <div className="skill-overview" aria-label="Skill profile summary">
+            <div className="skill-overview__item skill-overview__item--share">
+              <span>Skills you share</span>
+              <strong>{sharedSkills.length}</strong>
+            </div>
+            <div className="skill-overview__item skill-overview__item--learn">
+              <span>Learning goals</span>
+              <strong>{learnSkills.length}</strong>
+            </div>
+          </div>
+
           {userSkills.length === 0 ? (
             <div className="skills-empty">
               <h3>Your skill list is empty.</h3>
@@ -231,7 +242,10 @@ function MySkillsPage() {
 function SkillSection({ title, skills, onEdit, onDelete }) {
   return (
     <section className="skill-section">
-      <h3>{title}</h3>
+      <div className="skill-section__heading">
+        <h3>{title}</h3>
+        <span>{skills.length}</span>
+      </div>
       {skills.length ? (
         <div className="skill-grid">
           {skills.map((userSkill) => (

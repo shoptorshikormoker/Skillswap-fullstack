@@ -4,13 +4,18 @@ import './SkillComponents.css'
 
 function SkillCard({ userSkill, onEdit, onDelete }) {
   return (
-    <article className="skill-item">
+    <article className={`skill-item skill-item--${userSkill.skillType.toLowerCase()}`}>
       <div className="skill-item__topline">
         <SkillStatusBadge type={userSkill.skillType} />
         <SkillChip>{userSkill.categoryName}</SkillChip>
       </div>
-      <h3>{userSkill.skillName}</h3>
-      <p className="skill-item__level">{userSkill.level.toLowerCase()} level</p>
+      <div className="skill-item__title">
+        <span aria-hidden="true">{userSkill.skillName.charAt(0).toUpperCase()}</span>
+        <div>
+          <h3>{userSkill.skillName}</h3>
+          <p className="skill-item__level">{userSkill.level.toLowerCase()} level</p>
+        </div>
+      </div>
       <p>{userSkill.description || 'No additional description provided.'}</p>
 
       {(onEdit || onDelete) && (

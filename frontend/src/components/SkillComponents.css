@@ -30,6 +30,7 @@
 }
 
 .skill-item {
+  position: relative;
   display: flex;
   flex-direction: column;
   padding: 16px;
@@ -39,11 +40,29 @@
   box-shadow: var(--shadow-sm);
   transition:
     transform 180ms ease,
+    border-color 180ms ease,
     box-shadow 180ms ease;
+}
+
+.skill-item::before {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: var(--skill-accent, var(--color-primary));
+  content: '';
+}
+
+.skill-item--teach {
+  --skill-accent: var(--color-success);
+}
+
+.skill-item--learn {
+  --skill-accent: var(--color-primary);
 }
 
 .skill-item:hover {
   transform: translateY(-3px);
+  border-color: #cbd9e8;
   box-shadow: var(--shadow-md);
 }
 
@@ -53,6 +72,26 @@
   gap: 8px;
   justify-content: space-between;
   margin-bottom: 13px;
+}
+
+.skill-item__title {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin-bottom: 13px;
+}
+
+.skill-item__title > span {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
+  place-items: center;
+  border-radius: 10px;
+  color: var(--skill-accent);
+  background: color-mix(in srgb, var(--skill-accent) 11%, white);
+  font-family: var(--font-heading);
+  font-weight: 800;
 }
 
 .skill-item h3 {
@@ -66,7 +105,7 @@
 }
 
 .skill-item .skill-item__level {
-  margin-bottom: 14px;
+  margin: 0;
   color: var(--color-primary-dark);
   font-size: 0.88rem;
   font-weight: 700;
@@ -82,14 +121,25 @@
 }
 
 .skill-item__actions button {
-  padding: 0;
-  border: 0;
+  padding: 5px 9px;
+  border: 1px solid #cbd9e8;
+  border-radius: 7px;
   color: var(--color-primary-dark);
   background: transparent;
   font-weight: 700;
   cursor: pointer;
 }
 
+.skill-item__actions button:hover {
+  border-color: #9fc1e6;
+  background: var(--color-primary-light);
+}
+
 .skill-item__actions .skill-item__delete {
   color: var(--color-error);
+}
+
+.skill-item__actions .skill-item__delete:hover {
+  border-color: #efc2bf;
+  background: var(--color-error-light);
 }
