@@ -610,7 +610,7 @@
   color: #fff;
   background:
     radial-gradient(circle at 65% 25%, rgba(255, 255, 255, 0.25), transparent 28%),
-    linear-gradient(145deg, #1153b5, #4a98f4);
+    linear-gradient(145deg, var(--color-primary-dark), #18a2f2);
   font-size: 3.25rem;
 }
 
@@ -779,9 +779,9 @@
 
 /* Compact horizontal discovery card. */
 .profile-result {
-  --profile-panel: linear-gradient(145deg, #f4f1ff, #e8e3fb);
-  --profile-tag-bg: #eee5ff;
-  --profile-tag-text: #523c87;
+  --profile-panel: linear-gradient(145deg, #eaf6ff, #dceeff);
+  --profile-tag-bg: #e1f1ff;
+  --profile-tag-text: #0756b8;
   display: grid;
   grid-template-columns: 118px minmax(0, 1fr);
   gap: 14px;
@@ -798,21 +798,21 @@
 }
 
 .profile-result:nth-child(4n + 2) {
-  --profile-panel: linear-gradient(145deg, #edf8e8, #dbeed4);
-  --profile-tag-bg: #e4f4dc;
-  --profile-tag-text: #31713a;
+  --profile-panel: linear-gradient(145deg, #e9faf3, #d7f3e7);
+  --profile-tag-bg: #dcf7ea;
+  --profile-tag-text: #087e55;
 }
 
 .profile-result:nth-child(4n + 3) {
-  --profile-panel: linear-gradient(145deg, #eaf4ff, #d9eaff);
-  --profile-tag-bg: #deedff;
-  --profile-tag-text: #245f9f;
+  --profile-panel: linear-gradient(145deg, #edf3fa, #dce7f3);
+  --profile-tag-bg: #e5eef8;
+  --profile-tag-text: #0d2e52;
 }
 
 .profile-result:nth-child(4n + 4) {
-  --profile-panel: linear-gradient(145deg, #fff4df, #ffe8be);
-  --profile-tag-bg: #ffedca;
-  --profile-tag-text: #925a18;
+  --profile-panel: linear-gradient(145deg, #e9fbfa, #d5f3f0);
+  --profile-tag-bg: #dcf8f5;
+  --profile-tag-text: #087c75;
 }
 
 .profile-result:focus-within {

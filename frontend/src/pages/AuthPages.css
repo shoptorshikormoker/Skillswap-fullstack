@@ -19,7 +19,7 @@
   color: #fff;
   background:
     radial-gradient(circle at 20% 15%, rgba(78, 153, 255, 0.35), transparent 20rem),
-    linear-gradient(145deg, #0f2345, #1153b5 65%, #1769e0);
+    linear-gradient(145deg, #0d2e52, var(--color-primary-dark) 65%, var(--color-primary));
 }
 
 .auth-visual::before {
@@ -198,7 +198,7 @@
   border: 1px solid #f3b8b5;
   border-radius: var(--radius-sm);
   color: #9f2f29;
-  background: var(--color-accent-light);
+  background: var(--color-error-light);
   font-size: 0.84rem;
   animation: alert-in 230ms ease-out both;
 }

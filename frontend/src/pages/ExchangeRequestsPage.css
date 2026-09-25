@@ -104,7 +104,7 @@
 .request-status--rejected,
 .request-status--cancelled {
   color: var(--color-error) !important;
-  background: var(--color-accent-light);
+  background: var(--color-error-light);
 }
 .request-swap {
   display: grid;

@@ -132,7 +132,7 @@
 }
 .session-status--cancelled {
   color: var(--color-error);
-  background: var(--color-accent-light);
+  background: var(--color-error-light);
 }
 .session-empty,
 .session-alert {
@@ -215,7 +215,7 @@
   padding: clamp(22px, 4vw, 34px);
   border-radius: var(--radius-lg);
   color: #fff;
-  background: linear-gradient(135deg, #1153b5, #1769e0);
+  background: linear-gradient(135deg, var(--color-primary-dark), var(--color-primary));
   box-shadow: var(--shadow-md);
 }
 .session-detail-hero .session-status {

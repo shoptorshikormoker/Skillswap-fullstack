@@ -111,7 +111,7 @@
 .site-header__logout:hover {
   color: var(--color-error);
   border-color: #f1c5c2;
-  background: var(--color-accent-light);
+  background: var(--color-error-light);
 }
 
 .site-header__signup {

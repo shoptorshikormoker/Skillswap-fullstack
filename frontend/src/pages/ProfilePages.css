@@ -214,7 +214,7 @@
   color: #fff;
   background:
     radial-gradient(circle at 92% 20%, rgba(255, 255, 255, 0.16), transparent 13rem),
-    linear-gradient(135deg, #102d5f, #1769e0 72%, #3988ed);
+    linear-gradient(135deg, #0d2e52, var(--color-primary) 72%, #16a1f2);
   box-shadow: 0 20px 50px rgba(17, 83, 181, 0.2);
 }
 
@@ -520,7 +520,7 @@
 }
 .request-error {
   color: var(--color-error) !important;
-  background: var(--color-accent-light);
+  background: var(--color-error-light);
 }
 .request-dialog__actions {
   display: flex;
