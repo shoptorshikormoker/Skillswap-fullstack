@@ -89,6 +89,11 @@ function SiteHeader() {
               <HeaderLink to="/profile/edit" active={isActive('/profile/edit')}>
                 Profile
               </HeaderLink>
+              {user.role === 'ADMIN' && (
+                <HeaderLink to="/admin" active={isActive('/admin')}>
+                  Admin
+                </HeaderLink>
+              )}
               <button className="site-header__logout" type="button" onClick={handleLogout}>
                 Log out
               </button>

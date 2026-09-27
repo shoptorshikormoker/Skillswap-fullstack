@@ -15,6 +15,7 @@ import SessionDetailsPage from './pages/SessionDetailsPage'
 import SessionsPage from './pages/SessionsPage'
 import ChatPage from './pages/ChatPage'
 import NotificationsPage from './pages/NotificationsPage'
+import AdminPage from './pages/AdminPage'
 
 function App() {
   return (
@@ -87,6 +88,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <ChatPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute role="ADMIN">
+                <AdminPage />
               </ProtectedRoute>
             }
           />

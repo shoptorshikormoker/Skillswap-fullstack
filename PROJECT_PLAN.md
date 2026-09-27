@@ -914,20 +914,20 @@ Checklist meaning:
 
 ### Milestone 11 - Admin and final improvement
 
-- [ ] Add admin authorization rules
-- [ ] Build user-management endpoints and page
-- [ ] Build category-management endpoints and page
-- [ ] Add loading, empty, success, and error states across all pages
-- [ ] Add modal, toast, button, page, and card animations where planned
-- [ ] Add reduced-motion support
-- [ ] Check keyboard navigation, focus states, labels, and color contrast
-- [ ] Check every page on phone, tablet, and desktop widths
-- [ ] Add safe sample data
-- [ ] Manually complete the full workflow with two user accounts
-- [ ] Verify secrets and generated files are ignored by Git
-- [ ] Complete all README setup and usage instructions
-- [ ] Review final Git history for clear commits
-- [ ] Commit the completed first version
+- [x] Add admin authorization rules
+- [x] Build user-management endpoints and page
+- [x] Build category-management endpoints and page
+- [x] Add loading, empty, success, and error states across all pages
+- [x] Add modal, toast, button, page, and card animations where planned
+- [x] Add reduced-motion support
+- [x] Check keyboard navigation, focus states, labels, and color contrast
+- [x] Check every page on phone, tablet, and desktop widths
+- [x] Add safe sample data
+- [x] Manually complete the full workflow with two user accounts
+- [x] Verify secrets and generated files are ignored by Git
+- [x] Complete all README setup and usage instructions
+- [x] Review final Git history for clear commits
+- [x] Commit the completed first version
 
 ### Optional features - not part of the first version
 

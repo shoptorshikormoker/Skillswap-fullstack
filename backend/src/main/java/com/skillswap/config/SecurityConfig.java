@@ -30,6 +30,8 @@ public class SecurityConfig {
                 .exceptionHandling(exceptions -> exceptions.authenticationEntryPoint((request, response, exception) ->
                         response.sendError(HttpStatus.UNAUTHORIZED.value(), "Unauthorized")))
                 .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers("/api/admin/**")
+                        .hasRole("ADMIN")
                         .requestMatchers("/api/health", "/api/auth/register", "/api/auth/login")
                         .permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/profiles/{userId:\\d+}")

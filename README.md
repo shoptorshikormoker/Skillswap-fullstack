@@ -20,8 +20,6 @@ Skillswap-fullstack/
 `-- backend/
 ```
 
-Setup and run instructions will be expanded during Milestone 1.
-
 ## Requirements
 
 - Java 25
@@ -123,7 +121,7 @@ npm run build
 
 ## Current progress
 
-Milestones 1 through 10 are complete. Users can manage profiles and skills, find matching partners, complete exchange requests, schedule learning sessions, join private Jitsi rooms, review partners, chat after an accepted exchange, and follow activity through notifications.
+Milestones 1 through 11 are complete. Users can manage profiles and skills, find matching partners, complete exchange requests, schedule learning sessions, join private Jitsi rooms, review partners, chat after an accepted exchange, and follow activity through notifications. Administrators can manage account access and skill categories.
 
 ## Authentication pages and API
 
@@ -349,3 +347,53 @@ Manual two-account check:
 4. Trigger exchange and session activity, then confirm the recipient sees the unread notification count and notification list.
 5. Mark one notification as read, then use **Mark all as read** and confirm the unread badge clears.
 6. Confirm one account cannot mark another account's notification as read.
+
+## Admin workspace
+
+The admin workspace is available only to authenticated users with the `ADMIN` role:
+
+```text
+http://localhost:5173/admin
+```
+
+For local development, register an account normally and promote it directly in MySQL:
+
+```sql
+UPDATE users SET role = 'ADMIN' WHERE email = 'your-admin@example.com';
+```
+
+Log out and back in after changing the role so the new JWT contains the admin authority. Do not expose database access or role-promotion controls in the public application.
+
+Backend endpoints:
+
+```text
+GET    /api/admin/users
+PATCH  /api/admin/users/{userId}/enabled
+POST   /api/admin/categories
+PUT    /api/admin/categories/{categoryId}
+DELETE /api/admin/categories/{categoryId}
+```
+
+Admins can enable or disable accounts but cannot disable their own account. Disabled users cannot log in or authenticate with an existing token. Category names must be unique, and a category cannot be deleted while skills still belong to it.
+
+## Sample data and final manual check
+
+The backend safely creates four starter categories and twelve catalog skills on startup. The initializer is repeatable and never creates duplicate names. Suggested local-only accounts and a two-user scenario are in [SAMPLE_USERS.md](SAMPLE_USERS.md); sample passwords and users are intentionally not inserted automatically.
+
+Final workflow check:
+
+1. Register users A and B and complete both profiles.
+2. Add complementary teach and learn skills, then find user B from user A's search.
+3. Send and accept an exchange, confirm both stored notifications, and exchange chat messages.
+4. Schedule a future session, join its room in separate browser profiles, then complete it after its scheduled time.
+5. Submit one review from each account and confirm both public ratings.
+6. Promote a separate local account to admin, disable and re-enable user B, and create, rename, and delete an empty category.
+7. Check the workflow at phone (about 375px), tablet (about 768px), and desktop (1200px or wider) widths with keyboard-only navigation.
+
+## Production checklist
+
+- Use a long, randomly generated `JWT_SECRET` and production-only database credentials.
+- Set `FRONTEND_URL` to the exact deployed frontend origin.
+- Keep `.env`, `node_modules`, `dist`, Maven `target`, and IDE files out of Git (the root `.gitignore` already covers them).
+- Replace the public Jitsi service with managed or self-hosted infrastructure before a real public launch.
+- Remove demonstration accounts and review category/user access before deployment.

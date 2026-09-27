@@ -100,9 +100,17 @@ h3 {
 }
 
 .button:focus-visible,
-a:focus-visible {
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
   outline: 3px solid rgba(23, 105, 224, 0.28);
   outline-offset: 3px;
+}
+
+button:disabled {
+  cursor: not-allowed;
 }
 
 .button--primary {
