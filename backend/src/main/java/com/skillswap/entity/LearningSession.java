@@ -31,6 +31,9 @@ public class LearningSession {
     @Column(length = 500)
     private String meetingUrl;
 
+    @Column(nullable = false, unique = true, length = 80)
+    private String videoRoomName;
+
     @Column(length = 200)
     private String location;
 
@@ -67,6 +70,14 @@ public class LearningSession {
 
     public void setMeetingUrl(String meetingUrl) {
         this.meetingUrl = meetingUrl;
+    }
+
+    public String getVideoRoomName() {
+        return videoRoomName;
+    }
+
+    public void setVideoRoomName(String videoRoomName) {
+        this.videoRoomName = videoRoomName;
     }
 
     public String getLocation() {

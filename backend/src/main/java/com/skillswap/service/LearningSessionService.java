@@ -18,6 +18,7 @@ import com.skillswap.repository.NotificationRepository;
 import com.skillswap.repository.UserRepository;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -52,6 +53,7 @@ public class LearningSessionService {
         }
         LearningSession session = new LearningSession();
         session.setExchangeRequest(exchange);
+        session.setVideoRoomName(generateVideoRoomName());
         apply(session, input.scheduledAt(), input.meetingUrl(), input.location(), input.agenda());
         session = sessionRepository.save(session);
         notifyOther(
@@ -179,5 +181,9 @@ public class LearningSessionService {
 
     private String clean(String value) {
         return value == null || value.isBlank() ? null : value.trim();
+    }
+
+    private String generateVideoRoomName() {
+        return "skillswap-" + UUID.randomUUID().toString().replace("-", "") + "-" + UUID.randomUUID();
     }
 }

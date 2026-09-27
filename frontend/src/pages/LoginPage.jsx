@@ -6,7 +6,7 @@ import { useAuth } from '../context/authContext'
 import './AuthPages.css'
 
 function LoginPage() {
-  const { user, login } = useAuth()
+  const { user, loading, login } = useAuth()
   const navigate = useNavigate()
   const [formData, setFormData] = useState({ email: '', password: '' })
   const [error, setError] = useState('')
@@ -33,6 +33,14 @@ function LoginPage() {
     } finally {
       setSubmitting(false)
     }
+  }
+
+  if (loading) {
+    return (
+      <div className="page-loading" aria-label="Checking your session">
+        Checking your session...
+      </div>
+    )
   }
 
   return (
@@ -81,7 +89,7 @@ function LoginPage() {
             <button
               className="button button--primary auth-submit"
               type="submit"
-              disabled={submitting}
+              disabled={submitting || loading}
             >
               {submitting ? 'Logging in...' : 'Log in'}
             </button>

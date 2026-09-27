@@ -6,6 +6,7 @@ import SkillCard from '../components/SkillCard'
 import ExchangeRequestForm from '../components/ExchangeRequestForm'
 import { useAuth } from '../context/authContext'
 import { getPublicProfile } from '../services/profileService'
+import { getProfileReviews } from '../services/reviewService'
 import { getUserSkills } from '../services/skillService'
 import './ProfilePages.css'
 
@@ -14,15 +15,17 @@ function PublicProfilePage() {
   const { user } = useAuth()
   const [profile, setProfile] = useState(null)
   const [userSkills, setUserSkills] = useState([])
+  const [reviewData, setReviewData] = useState({ averageRating: 0, reviewCount: 0, reviews: [] })
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [showRequestForm, setShowRequestForm] = useState(false)
 
   useEffect(() => {
-    Promise.all([getPublicProfile(userId), getUserSkills(userId)])
-      .then(([profileData, skillData]) => {
+    Promise.all([getPublicProfile(userId), getUserSkills(userId), getProfileReviews(userId)])
+      .then(([profileData, skillData, reviews]) => {
         setProfile(profileData)
         setUserSkills(skillData)
+        setReviewData(reviews)
       })
       .catch((requestError) =>
         setError(requestError.response?.data?.message || 'We could not load this profile.'),
@@ -66,6 +69,10 @@ function PublicProfilePage() {
               </span>
               <span>
                 <strong>{learnSkills.length}</strong> learning goals
+              </span>
+              <span>
+                <strong>{reviewData.reviewCount ? `${reviewData.averageRating} ★` : 'New'}</strong>{' '}
+                {reviewData.reviewCount ? `${reviewData.reviewCount} reviews` : 'no reviews yet'}
               </span>
             </div>
           </div>
@@ -116,6 +123,50 @@ function PublicProfilePage() {
             <div className="profile-empty">
               <h3>No skills added yet.</h3>
               <p>{profile.name} has not added sharing or learning skills.</p>
+            </div>
+          )}
+        </section>
+
+        <section className="profile-reviews">
+          <header>
+            <div>
+              <p className="eyebrow">Community feedback</p>
+              <h2>Member reviews</h2>
+            </div>
+            {reviewData.reviewCount > 0 && (
+              <div className="profile-rating-summary">
+                <strong>{reviewData.averageRating}</strong>
+                <span>★</span>
+                <small>{reviewData.reviewCount} reviews</small>
+              </div>
+            )}
+          </header>
+          {reviewData.reviews.length ? (
+            <div className="profile-review-grid">
+              {reviewData.reviews.map((review) => (
+                <article key={review.id} className="profile-review-card">
+                  <div className="review-stars" aria-label={`${review.rating} out of 5 stars`}>
+                    {'★'.repeat(review.rating)}
+                    {'☆'.repeat(5 - review.rating)}
+                  </div>
+                  <p>{review.comment || 'A positive learning exchange.'}</p>
+                  <footer>
+                    <strong>{review.reviewerName}</strong>
+                    <time dateTime={review.createdAt}>
+                      {new Date(review.createdAt).toLocaleDateString(undefined, {
+                        month: 'short',
+                        day: 'numeric',
+                        year: 'numeric',
+                      })}
+                    </time>
+                  </footer>
+                </article>
+              ))}
+            </div>
+          ) : (
+            <div className="profile-empty profile-reviews__empty">
+              <h3>No reviews yet</h3>
+              <p>Completed learning exchanges will build this member's reputation.</p>
             </div>
           )}
         </section>

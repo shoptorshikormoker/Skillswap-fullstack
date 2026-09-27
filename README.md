@@ -123,7 +123,7 @@ npm run build
 
 ## Current progress
 
-Milestones 1 through 7 are complete. Users can manage their profiles and skills, find matching partners, complete the exchange-request workflow, and schedule, update, complete, or cancel learning sessions.
+Milestones 1 through 9 are complete. Users can manage profiles and skills, find matching partners, complete exchange requests, schedule learning sessions, join private Jitsi rooms, and review partners after completed sessions.
 
 ## Authentication pages and API
 
@@ -268,3 +268,53 @@ Manual two-account check:
 5. Verify completion is blocked before the scheduled time, then complete it after that time.
 6. Schedule another accepted exchange, cancel its session, and confirm completed/cancelled sessions appear in history.
 7. Verify a third account cannot read or modify either session.
+
+## Video meetings
+
+Every learning session receives a long, random Jitsi room name when it is created. Room information is included in the protected session response only after the backend verifies that the signed-in user is one of the two exchange participants. A scheduled session shows **Join video meeting** on its details page and opens a responsive embedded meeting powered by the Jitsi IFrame API.
+
+For an existing database, run this migration before restarting the backend:
+
+```text
+backend/database/migrations/20260925_add_video_room_to_sessions.sql
+```
+
+The meeting screen asks for camera and microphone access after the user chooses to join. If permission is denied, the user can retry, continue to Jitsi without the preflight check, or open the room in a new tab. The optional session meeting URL remains available as a fallback link. The default integration uses the public `meet.jit.si` service, so production deployments should review Jitsi's service terms or configure a dedicated Jitsi deployment.
+
+Manual two-account check:
+
+1. Sign in with two exchange participants in separate browsers or browser profiles.
+2. Open the same scheduled session in both browsers and select **Join video meeting**.
+3. Allow camera and microphone access, join the room, and confirm both participants can see or hear each other.
+4. Leave and rejoin once, then deny media permission and verify the retry and external-link fallbacks.
+5. Confirm a third account cannot retrieve the session or its room name.
+6. Check the embedded meeting at phone and desktop widths.
+
+## Reviews
+
+After a learning session is marked `COMPLETED`, each participant can submit one review of the other participant from the session details page. Reviews contain a required rating from 1 to 5 and an optional comment of up to 1000 characters. The backend derives the reviewed member from the authenticated participant and session, preventing clients from reviewing an unrelated user. Reviews for scheduled or cancelled sessions, third-party submissions, and duplicate reviews are rejected.
+
+Public profiles display the member's average rating, total review count, and received reviews. Reviewer email addresses and other private account information are never included.
+
+Backend endpoints:
+
+```text
+POST /api/reviews
+GET  /api/reviews/mine
+GET  /api/reviews/users/{userId}
+```
+
+For an existing database, run this migration before restarting the backend:
+
+```text
+backend/database/migrations/20260926_create_reviews.sql
+```
+
+Manual two-account check:
+
+1. Complete a learning session shared by users A and B.
+2. Open the completed session as user A, submit a rating and comment, and confirm the submitted state appears.
+3. Open user B's public profile and confirm its average, count, reviewer name, rating, and comment.
+4. Try submitting another review for the same session and confirm it is rejected.
+5. Sign in as user B and confirm user B can independently review user A.
+6. Confirm a third user and participants in scheduled or cancelled sessions cannot submit a review.

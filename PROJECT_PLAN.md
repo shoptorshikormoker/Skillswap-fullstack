@@ -876,28 +876,28 @@ Checklist meaning:
 
 ### Milestone 8 - Video meetings
 
-- [ ] Add the Jitsi IFrame API to the frontend
-- [ ] Generate and save a long random room name in the backend
-- [ ] Return room information only to session participants
-- [ ] Show Join Meeting only for an authorized scheduled session
-- [ ] Build the responsive embedded meeting area
-- [ ] Add joining, loading, leaving, and fallback states
-- [ ] Handle denied camera and microphone permissions
-- [ ] Add an external meeting-link fallback
-- [ ] Verify a call with two accounts in separate browsers
-- [ ] Check meeting layout on phone and desktop widths
-- [ ] Update the README and commit the video-meeting milestone
+- [x] Add the Jitsi IFrame API to the frontend
+- [x] Generate and save a long random room name in the backend
+- [x] Return room information only to session participants
+- [x] Show Join Meeting only for an authorized scheduled session
+- [x] Build the responsive embedded meeting area
+- [x] Add joining, loading, leaving, and fallback states
+- [x] Handle denied camera and microphone permissions
+- [x] Add an external meeting-link fallback
+- [x] Verify a call with two accounts in separate browsers
+- [x] Check meeting layout on phone and desktop widths
+- [x] Update the README and commit the video-meeting milestone
 
 ### Milestone 9 - Reviews
 
-- [ ] Create the review entity
-- [ ] Create review DTOs, repository, service, and controller
-- [ ] Allow reviews only after completed sessions
-- [ ] Prevent duplicate and unauthorized reviews
-- [ ] Build and style the review form
-- [ ] Display reviews and average rating on profiles
-- [ ] Manually verify valid and invalid review cases
-- [ ] Update the README and commit the review milestone
+- [x] Create the review entity
+- [x] Create review DTOs, repository, service, and controller
+- [x] Allow reviews only after completed sessions
+- [x] Prevent duplicate and unauthorized reviews
+- [x] Build and style the review form
+- [x] Display reviews and average rating on profiles
+- [x] Manually verify valid and invalid review cases
+- [x] Update the README and commit the review milestone
 
 ### Milestone 10 - Chat and notifications
 

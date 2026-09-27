@@ -62,14 +62,15 @@ function SessionForm({
       </label>
       <div className="session-form__row">
         <label>
-          Meeting link <span>(optional)</span>
+          Fallback meeting link <span>(optional)</span>
           <input
             type="url"
             maxLength="500"
-            placeholder="https://meet.example.com/room"
+            placeholder="https://meet.example.com/backup-room"
             value={form.meetingUrl}
             onChange={(event) => update('meetingUrl', event.target.value)}
           />
+          <small>A private Jitsi room is created automatically. Add this only as a backup.</small>
         </label>
         <label>
           Physical location <span>(optional)</span>

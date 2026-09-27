@@ -34,6 +34,8 @@ public class SecurityConfig {
                         .permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/profiles/{userId:\\d+}")
                         .permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/reviews/users/{userId:\\d+}")
+                        .permitAll()
                         .requestMatchers(
                                 HttpMethod.GET,
                                 "/api/categories",

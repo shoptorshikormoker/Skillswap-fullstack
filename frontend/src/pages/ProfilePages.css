@@ -327,6 +327,92 @@
   margin-top: 28px;
 }
 
+.profile-reviews {
+  margin-top: 34px;
+}
+
+.profile-reviews > header {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 16px;
+}
+
+.profile-reviews h2 {
+  margin: 5px 0 0;
+  font-size: clamp(1.25rem, 2.6vw, 1.6rem);
+}
+
+.profile-rating-summary {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  padding: 9px 13px;
+  border: 1px solid #f6dfae;
+  border-radius: 10px;
+  background: #fffaf0;
+}
+
+.profile-rating-summary strong {
+  font-size: 1.35rem;
+}
+
+.profile-rating-summary span,
+.review-stars {
+  color: #f5a623;
+}
+
+.profile-rating-summary small {
+  margin-left: 3px;
+  color: var(--color-text-muted);
+}
+
+.profile-review-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.profile-review-card {
+  padding: 18px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: #fff;
+  box-shadow: var(--shadow-sm);
+}
+
+.profile-review-card .review-stars {
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+}
+
+.profile-review-card > p {
+  min-height: 44px;
+  margin: 0 0 16px;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+.profile-review-card footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--color-border);
+  font-size: 0.78rem;
+}
+
+.profile-review-card time {
+  color: var(--color-text-muted);
+}
+
+.profile-reviews__empty {
+  margin-top: 0;
+}
+
 .public-profile__skills h2 {
   margin: 6px 0 24px;
   font-size: clamp(1.25rem, 2.6vw, 1.6rem);
@@ -404,7 +490,8 @@
 
   .profile-form__row,
   .profile-details,
-  .public-skill-grid {
+  .public-skill-grid,
+  .profile-review-grid {
     grid-template-columns: 1fr;
   }
 }
