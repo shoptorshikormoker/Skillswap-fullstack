@@ -172,6 +172,16 @@ function RequestCard({ request, tab, busy, onAction }) {
           <Link className="button button--secondary" to="/sessions">
             View sessions
           </Link>
+          <Link className="button button--secondary" to={`/exchanges/${request.id}/chat`}>
+            Open chat
+          </Link>
+        </div>
+      )}
+      {request.status === 'COMPLETED' && (
+        <div className="request-card__actions">
+          <Link className="button button--secondary" to={`/exchanges/${request.id}/chat`}>
+            Open chat
+          </Link>
         </div>
       )}
     </article>

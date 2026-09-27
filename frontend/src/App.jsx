@@ -13,6 +13,8 @@ import RegisterPage from './pages/RegisterPage'
 import SearchPage from './pages/SearchPage'
 import SessionDetailsPage from './pages/SessionDetailsPage'
 import SessionsPage from './pages/SessionsPage'
+import ChatPage from './pages/ChatPage'
+import NotificationsPage from './pages/NotificationsPage'
 
 function App() {
   return (
@@ -77,6 +79,22 @@ function App() {
             element={
               <ProtectedRoute>
                 <MySkillsPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/exchanges/:exchangeId/chat"
+            element={
+              <ProtectedRoute>
+                <ChatPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/notifications"
+            element={
+              <ProtectedRoute>
+                <NotificationsPage />
               </ProtectedRoute>
             }
           />

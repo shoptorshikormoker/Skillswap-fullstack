@@ -10,6 +10,8 @@ public interface ExchangeRequestRepository extends JpaRepository<ExchangeRequest
 
     List<ExchangeRequest> findByReceiverIdOrderByCreatedAtDesc(Long receiverId);
 
+    List<ExchangeRequest> findBySenderIdOrReceiverIdOrderByCreatedAtDesc(Long senderId, Long receiverId);
+
     boolean existsBySenderIdAndReceiverIdAndOfferedSkillIdAndWantedSkillIdAndStatus(
             Long senderId, Long receiverId, Long offeredSkillId, Long wantedSkillId, ExchangeRequestStatus status);
 }

@@ -901,16 +901,16 @@ Checklist meaning:
 
 ### Milestone 10 - Chat and notifications
 
-- [ ] Create the message entity
-- [ ] Create message DTOs, repository, service, and controller
-- [ ] Restrict messages to accepted exchange participants
-- [ ] Build and style the conversation page
-- [ ] Add manual or timed message refresh
-- [ ] Complete the notification entity and endpoints
-- [ ] Build the notification list and unread indicator
-- [ ] Add mark-one and mark-all-as-read actions
-- [ ] Manually verify messages and notifications with two accounts
-- [ ] Update the README and commit the chat/notification milestone
+- [x] Create the message entity
+- [x] Create message DTOs, repository, service, and controller
+- [x] Restrict messages to accepted exchange participants
+- [x] Build and style the conversation page
+- [x] Add manual or timed message refresh
+- [x] Complete the notification entity and endpoints
+- [x] Build the notification list and unread indicator
+- [x] Add mark-one and mark-all-as-read actions
+- [x] Manually verify messages and notifications with two accounts
+- [x] Update the README and commit the chat/notification milestone
 
 ### Milestone 11 - Admin and final improvement
 

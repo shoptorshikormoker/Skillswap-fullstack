@@ -123,7 +123,7 @@ npm run build
 
 ## Current progress
 
-Milestones 1 through 9 are complete. Users can manage profiles and skills, find matching partners, complete exchange requests, schedule learning sessions, join private Jitsi rooms, and review partners after completed sessions.
+Milestones 1 through 10 are complete. Users can manage profiles and skills, find matching partners, complete exchange requests, schedule learning sessions, join private Jitsi rooms, review partners, chat after an accepted exchange, and follow activity through notifications.
 
 ## Authentication pages and API
 
@@ -318,3 +318,34 @@ Manual two-account check:
 4. Try submitting another review for the same session and confirm it is rejected.
 5. Sign in as user B and confirm user B can independently review user A.
 6. Confirm a third user and participants in scheduled or cancelled sessions cannot submit a review.
+
+## Chat and notifications
+
+Accepted exchange partners can open a private conversation from the **Requests** page. Messages are stored in the database, limited to 1000 characters, and loaded again every five seconds while the conversation is open. Completed exchanges keep their conversation available. The backend verifies both exchange participation and exchange status before returning or accepting messages.
+
+Authenticated users can open **Notifications** from the main navigation to see exchange and session activity. The unread badge is loaded from the backend, and notifications can be marked read individually or all at once. Notification ownership checks prevent one user from reading or changing another user's notifications.
+
+Backend endpoints:
+
+```text
+GET  /api/messages/exchanges/{exchangeId}
+POST /api/messages/exchanges/{exchangeId}
+GET  /api/notifications
+POST /api/notifications/{id}/read
+POST /api/notifications/read-all
+```
+
+For an existing database, run this migration before restarting the backend:
+
+```text
+backend/database/migrations/20260927_create_messages.sql
+```
+
+Manual two-account check:
+
+1. Accept an exchange between users A and B, open its chat in two browser profiles, and send messages from both accounts.
+2. Confirm each conversation refreshes automatically and preserves messages after reloading the page.
+3. Confirm a pending/rejected exchange and an unrelated third user cannot load or send messages.
+4. Trigger exchange and session activity, then confirm the recipient sees the unread notification count and notification list.
+5. Mark one notification as read, then use **Mark all as read** and confirm the unread badge clears.
+6. Confirm one account cannot mark another account's notification as read.

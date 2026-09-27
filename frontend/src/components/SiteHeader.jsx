@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/authContext'
 import { getReceivedRequests } from '../services/exchangeService'
 import { getSessions } from '../services/sessionService'
+import { getNotifications } from '../services/notificationService'
 import BrandLogo from './BrandLogo'
 import './SiteHeader.css'
 
@@ -10,18 +11,19 @@ function SiteHeader() {
   const { user, logout } = useAuth()
   const location = useLocation()
   const navigate = useNavigate()
-  const [counts, setCounts] = useState({ requests: 0, sessions: 0 })
+  const [counts, setCounts] = useState({ requests: 0, sessions: 0, notifications: 0 })
   const isLanding = location.pathname === '/'
   const isAuthPage = ['/login', '/register'].includes(location.pathname)
   const variant = isLanding ? 'landing' : isAuthPage ? 'auth' : 'workspace'
 
   useEffect(() => {
     if (!user) return
-    Promise.all([getReceivedRequests(), getSessions()])
-      .then(([requests, sessions]) =>
+    Promise.all([getReceivedRequests(), getSessions(), getNotifications()])
+      .then(([requests, sessions, notifications]) =>
         setCounts({
           requests: requests.filter((request) => request.status === 'PENDING').length,
           sessions: sessions.filter((session) => session.status === 'SCHEDULED').length,
+          notifications: notifications.unreadCount,
         }),
       )
       .catch(() => undefined)
@@ -76,6 +78,13 @@ function SiteHeader() {
               </HeaderLink>
               <HeaderLink to="/sessions" active={isActive('/sessions')} count={counts.sessions}>
                 Sessions
+              </HeaderLink>
+              <HeaderLink
+                to="/notifications"
+                active={isActive('/notifications')}
+                count={counts.notifications}
+              >
+                Notifications
               </HeaderLink>
               <HeaderLink to="/profile/edit" active={isActive('/profile/edit')}>
                 Profile

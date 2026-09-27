@@ -47,6 +47,34 @@ public class Notification {
         createdAt = LocalDateTime.now();
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public NotificationType getType() {
+        return type;
+    }
+
+    public Long getReferenceId() {
+        return referenceId;
+    }
+
+    public boolean isRead() {
+        return read;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
     public void setUser(User user) {
         this.user = user;
     }
@@ -61,5 +89,9 @@ public class Notification {
 
     public void setReferenceId(Long referenceId) {
         this.referenceId = referenceId;
+    }
+
+    public void setRead(boolean read) {
+        this.read = read;
     }
 }
