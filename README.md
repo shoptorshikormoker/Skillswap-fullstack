@@ -94,7 +94,7 @@ npm install
 npm run dev
 ```
 
-Open `http://localhost:5173`. The Backend status card becomes green when the backend is available.
+Open `http://localhost:3000`. The Backend status card becomes green when the backend is available.
 
 To use another API address, copy `frontend/.env.example` to `frontend/.env` and change `VITE_API_URL`. The `.env` file is ignored by Git.
 
@@ -128,9 +128,9 @@ Milestones 1 through 11 are complete. Users can manage profiles and skills, find
 Frontend pages:
 
 ```text
-http://localhost:5173/register
-http://localhost:5173/login
-http://localhost:5173/dashboard
+http://localhost:3000/register
+http://localhost:3000/login
+http://localhost:3000/dashboard
 ```
 
 Backend endpoints:
@@ -148,8 +148,8 @@ The dashboard route and `/api/auth/me` require authentication. Logging out remov
 Frontend pages:
 
 ```text
-http://localhost:5173/profile/edit
-http://localhost:5173/profiles/{userId}
+http://localhost:3000/profile/edit
+http://localhost:3000/profiles/{userId}
 ```
 
 Backend endpoints:
@@ -167,7 +167,7 @@ The edit page and `/api/profiles/me` endpoints require authentication. Profile u
 The authenticated skill-management page is available at:
 
 ```text
-http://localhost:5173/skills
+http://localhost:3000/skills
 ```
 
 The application creates four starter categories and twelve starter skills when the backend starts. The initializer is safe to run repeatedly and does not create duplicate records.
@@ -191,7 +191,7 @@ Users can add skills as `TEACH` or `LEARN` and select `BEGINNER`, `INTERMEDIATE`
 The search page is available at:
 
 ```text
-http://localhost:5173/search
+http://localhost:3000/search
 ```
 
 Backend endpoint:
@@ -207,7 +207,7 @@ The public endpoint accepts optional `skill` and `categoryId` query parameters. 
 Authenticated users can open their request workspace at:
 
 ```text
-http://localhost:5173/exchanges
+http://localhost:3000/exchanges
 ```
 
 An exchange can be requested from another member's public profile when the sender has at least one skill to teach. The sender chooses the requested skill from the full catalog, so neither participant needs to add that skill to a learning or teaching list before the request is sent. The recipient can review the offered and requested skills before accepting or declining.
@@ -238,8 +238,8 @@ Manual two-account check:
 Authenticated users can view and schedule sessions at:
 
 ```text
-http://localhost:5173/sessions
-http://localhost:5173/sessions/new
+http://localhost:3000/sessions
+http://localhost:3000/sessions/new
 ```
 
 Either participant can schedule one learning session after an exchange is accepted. Both participants can view it, update its future date and meeting details, complete it after the scheduled time, or cancel it. Completing a session also changes its exchange request to `COMPLETED`.
@@ -357,7 +357,7 @@ Manual two-account check:
 The admin workspace is available only to authenticated users with the `ADMIN` role:
 
 ```text
-http://localhost:5173/admin
+http://localhost:3000/admin
 ```
 
 For local development, register an account normally and promote it directly in MySQL:
