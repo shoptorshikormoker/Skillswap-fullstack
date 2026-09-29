@@ -9,6 +9,9 @@ import {
 import './CommunicationPages.css'
 
 function destination(notification) {
+  if (notification.type === 'MESSAGE_RECEIVED') {
+    return `/exchanges/${notification.referenceId}/chat`
+  }
   return notification.type.startsWith('SESSION_')
     ? `/sessions/${notification.referenceId}`
     : '/exchanges'
@@ -19,9 +22,13 @@ function NotificationsPage() {
   const [error, setError] = useState('')
 
   useEffect(() => {
-    getNotifications()
-      .then(setData)
-      .catch(() => setError('Could not load notifications.'))
+    const loadNotifications = () =>
+      getNotifications()
+        .then(setData)
+        .catch(() => setError('Could not load notifications.'))
+    loadNotifications()
+    const timer = window.setInterval(loadNotifications, 10000)
+    return () => window.clearInterval(timer)
   }, [])
 
   async function markOne(id) {

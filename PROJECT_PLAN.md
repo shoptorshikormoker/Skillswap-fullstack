@@ -931,7 +931,7 @@ Checklist meaning:
 
 ### Optional features - not part of the first version
 
-- [ ] Real-time chat with WebSocket
+- [ ] Real-time chat with WebSocket (implemented; two-account browser verification pending)
 - [ ] Real-time notifications
 - [ ] Email notifications
 - [ ] Dark mode

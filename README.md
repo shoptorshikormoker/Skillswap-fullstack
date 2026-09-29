@@ -319,7 +319,7 @@ Manual two-account check:
 
 ## Chat and notifications
 
-Accepted exchange partners can open a private conversation from the **Requests** page. Messages are stored in the database, limited to 1000 characters, and loaded again every five seconds while the conversation is open. Completed exchanges keep their conversation available. The backend verifies both exchange participation and exchange status before returning or accepting messages.
+Accepted exchange partners can open a private conversation from the **Requests** page. Messages are delivered live over an authenticated WebSocket/STOMP connection, stored in the database, and limited to 1000 characters. A five-second REST refresh and REST message submission remain available as a fallback while the socket reconnects. Completed exchanges keep their conversation available. The backend verifies both exchange participation and exchange status before accepting messages, and delivers socket events through private user queues. Sending a message creates a stored notification for the recipient. Notification badges and the notification page refresh periodically, while opening the matching conversation automatically marks its message notifications as read.
 
 Authenticated users can open **Notifications** from the main navigation to see exchange and session activity. The unread badge is loaded from the backend, and notifications can be marked read individually or all at once. Notification ownership checks prevent one user from reading or changing another user's notifications.
 
@@ -328,9 +328,13 @@ Backend endpoints:
 ```text
 GET  /api/messages/exchanges/{exchangeId}
 POST /api/messages/exchanges/{exchangeId}
+WS   /ws
+SEND /app/exchanges/{exchangeId}/messages
+SUB  /user/queue/exchanges/{exchangeId}
 GET  /api/notifications
 POST /api/notifications/{id}/read
 POST /api/notifications/read-all
+POST /api/notifications/conversations/{exchangeId}/read
 ```
 
 For an existing database, run this migration before restarting the backend:

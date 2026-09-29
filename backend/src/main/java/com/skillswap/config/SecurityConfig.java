@@ -32,7 +32,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/api/admin/**")
                         .hasRole("ADMIN")
-                        .requestMatchers("/api/health", "/api/auth/register", "/api/auth/login")
+                        .requestMatchers("/api/health", "/api/auth/register", "/api/auth/login", "/ws/**")
                         .permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/profiles/{userId:\\d+}")
                         .permitAll()

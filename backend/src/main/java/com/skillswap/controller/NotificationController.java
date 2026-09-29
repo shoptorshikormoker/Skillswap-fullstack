@@ -36,4 +36,10 @@ public class NotificationController {
     public void markAllRead(Principal principal) {
         service.markAllRead(principal.getName());
     }
+
+    @PostMapping("/conversations/{exchangeId}/read")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void markConversationRead(@PathVariable Long exchangeId, Principal principal) {
+        service.markConversationRead(exchangeId, principal.getName());
+    }
 }

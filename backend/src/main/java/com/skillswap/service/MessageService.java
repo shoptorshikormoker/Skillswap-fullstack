@@ -5,13 +5,17 @@ import com.skillswap.dto.CreateMessageRequest;
 import com.skillswap.dto.MessageResponse;
 import com.skillswap.entity.ExchangeRequest;
 import com.skillswap.entity.Message;
+import com.skillswap.entity.Notification;
 import com.skillswap.entity.User;
 import com.skillswap.enums.ExchangeRequestStatus;
+import com.skillswap.enums.NotificationType;
 import com.skillswap.exception.BadRequestException;
 import com.skillswap.exception.ResourceNotFoundException;
 import com.skillswap.repository.ExchangeRequestRepository;
 import com.skillswap.repository.MessageRepository;
+import com.skillswap.repository.NotificationRepository;
 import com.skillswap.repository.UserRepository;
+import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,14 +24,17 @@ public class MessageService {
     private final MessageRepository messageRepository;
     private final ExchangeRequestRepository exchangeRepository;
     private final UserRepository userRepository;
+    private final NotificationRepository notificationRepository;
 
     public MessageService(
             MessageRepository messageRepository,
             ExchangeRequestRepository exchangeRepository,
-            UserRepository userRepository) {
+            UserRepository userRepository,
+            NotificationRepository notificationRepository) {
         this.messageRepository = messageRepository;
         this.exchangeRepository = exchangeRepository;
         this.userRepository = userRepository;
+        this.notificationRepository = notificationRepository;
     }
 
     @Transactional(readOnly = true)
@@ -56,7 +63,18 @@ public class MessageService {
         message.setExchangeRequest(exchange);
         message.setSender(user);
         message.setContent(input.content().trim());
-        return MessageResponse.from(messageRepository.save(message));
+        Message savedMessage = messageRepository.save(message);
+        User recipient =
+                exchange.getSender().getId().equals(user.getId()) ? exchange.getReceiver() : exchange.getSender();
+        notifyRecipient(recipient, user, exchange.getId());
+        return MessageResponse.from(savedMessage);
+    }
+
+    @Transactional(readOnly = true)
+    public List<String> getParticipantEmails(Long exchangeId, String email) {
+        User user = findUser(email);
+        ExchangeRequest exchange = requireConversation(exchangeId, user);
+        return List.of(exchange.getSender().getEmail(), exchange.getReceiver().getEmail());
     }
 
     private ExchangeRequest requireConversation(Long exchangeId, User user) {
@@ -77,5 +95,14 @@ public class MessageService {
         return userRepository
                 .findByEmailIgnoreCase(email)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found."));
+    }
+
+    private void notifyRecipient(User recipient, User sender, Long exchangeId) {
+        Notification notification = new Notification();
+        notification.setUser(recipient);
+        notification.setMessage(sender.getName() + " sent you a new message.");
+        notification.setType(NotificationType.MESSAGE_RECEIVED);
+        notification.setReferenceId(exchangeId);
+        notificationRepository.save(notification);
     }
 }

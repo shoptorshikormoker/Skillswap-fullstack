@@ -84,6 +84,14 @@ function App() {
             }
           />
           <Route
+            path="/chat"
+            element={
+              <ProtectedRoute>
+                <ChatPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
             path="/exchanges/:exchangeId/chat"
             element={
               <ProtectedRoute>

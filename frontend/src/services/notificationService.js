@@ -13,3 +13,7 @@ export async function markNotificationRead(id) {
 export async function markAllNotificationsRead() {
   await api.post('/notifications/read-all')
 }
+
+export async function markConversationNotificationsRead(exchangeId) {
+  await api.post(`/notifications/conversations/${exchangeId}/read`)
+}

@@ -4,6 +4,7 @@ import com.skillswap.dto.NotificationListResponse;
 import com.skillswap.dto.NotificationResponse;
 import com.skillswap.entity.Notification;
 import com.skillswap.entity.User;
+import com.skillswap.enums.NotificationType;
 import com.skillswap.exception.ResourceNotFoundException;
 import com.skillswap.repository.NotificationRepository;
 import com.skillswap.repository.UserRepository;
@@ -46,6 +47,15 @@ public class NotificationService {
         User user = findUser(email);
         notificationRepository.findByUserIdOrderByCreatedAtDesc(user.getId()).stream()
                 .filter(notification -> !notification.isRead())
+                .forEach(notification -> notification.setRead(true));
+    }
+
+    @Transactional
+    public void markConversationRead(Long exchangeId, String email) {
+        User user = findUser(email);
+        notificationRepository
+                .findByUserIdAndTypeAndReferenceIdAndReadFalse(
+                        user.getId(), NotificationType.MESSAGE_RECEIVED, exchangeId)
                 .forEach(notification -> notification.setRead(true));
     }
 

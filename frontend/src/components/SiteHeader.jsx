@@ -12,22 +12,66 @@ function SiteHeader() {
   const location = useLocation()
   const navigate = useNavigate()
   const [counts, setCounts] = useState({ requests: 0, sessions: 0, notifications: 0 })
+  const [messageAlert, setMessageAlert] = useState(null)
   const isLanding = location.pathname === '/'
   const isAuthPage = ['/login', '/register'].includes(location.pathname)
   const variant = isLanding ? 'landing' : isAuthPage ? 'auth' : 'workspace'
 
   useEffect(() => {
     if (!user) return
-    Promise.all([getReceivedRequests(), getSessions(), getNotifications()])
-      .then(([requests, sessions, notifications]) =>
-        setCounts({
-          requests: requests.filter((request) => request.status === 'PENDING').length,
-          sessions: sessions.filter((session) => session.status === 'SCHEDULED').length,
-          notifications: notifications.unreadCount,
-        }),
+
+    function handleNotifications(notifications) {
+      setCounts((current) => ({ ...current, notifications: notifications.unreadCount }))
+
+      const latestMessage = notifications.notifications.find(
+        (notification) =>
+          !notification.read &&
+          notification.type === 'MESSAGE_RECEIVED' &&
+          location.pathname !== `/exchanges/${notification.referenceId}/chat`,
       )
-      .catch(() => undefined)
+      if (!latestMessage) return
+
+      const seenIds = JSON.parse(sessionStorage.getItem('skillswap_seen_alerts') || '[]')
+      if (seenIds.includes(latestMessage.id)) return
+
+      sessionStorage.setItem(
+        'skillswap_seen_alerts',
+        JSON.stringify([...seenIds, latestMessage.id].slice(-50)),
+      )
+      setMessageAlert(latestMessage)
+    }
+
+    const loadCounts = () =>
+      Promise.all([getReceivedRequests(), getSessions(), getNotifications()])
+        .then(([requests, sessions, notifications]) => {
+          setCounts({
+            requests: requests.filter((request) => request.status === 'PENDING').length,
+            sessions: sessions.filter((session) => session.status === 'SCHEDULED').length,
+            notifications: notifications.unreadCount,
+          })
+          handleNotifications(notifications)
+        })
+        .catch(() => undefined)
+
+    const loadNotificationCount = () =>
+      getNotifications()
+        .then(handleNotifications)
+        .catch(() => undefined)
+
+    loadCounts()
+    const timer = window.setInterval(loadNotificationCount, 5000)
+    window.addEventListener('skillswap:notifications-changed', loadNotificationCount)
+    return () => {
+      window.clearInterval(timer)
+      window.removeEventListener('skillswap:notifications-changed', loadNotificationCount)
+    }
   }, [user, location.pathname])
+
+  useEffect(() => {
+    if (!messageAlert) return
+    const timer = window.setTimeout(() => setMessageAlert(null), 8000)
+    return () => window.clearTimeout(timer)
+  }, [messageAlert])
 
   function isActive(path) {
     if (path === '/') return location.pathname === '/'
@@ -80,6 +124,12 @@ function SiteHeader() {
                 Sessions
               </HeaderLink>
               <HeaderLink
+                to="/chat"
+                active={isActive('/chat') || /^\/exchanges\/\d+\/chat$/.test(location.pathname)}
+              >
+                Chat
+              </HeaderLink>
+              <HeaderLink
                 to="/notifications"
                 active={isActive('/notifications')}
                 count={counts.notifications}
@@ -116,6 +166,32 @@ function SiteHeader() {
           )}
         </div>
       </nav>
+      {messageAlert && (
+        <aside className="message-alert" role="status" aria-live="polite">
+          <Link
+            className="message-alert__link"
+            to={`/exchanges/${messageAlert.referenceId}/chat`}
+            onClick={() => setMessageAlert(null)}
+          >
+            <span className="message-alert__icon" aria-hidden="true">
+              ✉
+            </span>
+            <span>
+              <strong>New message</strong>
+              <small>{messageAlert.message}</small>
+              <b>Open conversation →</b>
+            </span>
+          </Link>
+          <button
+            className="message-alert__close"
+            type="button"
+            aria-label="Dismiss message alert"
+            onClick={() => setMessageAlert(null)}
+          >
+            ×
+          </button>
+        </aside>
+      )}
     </header>
   )
 }

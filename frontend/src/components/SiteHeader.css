@@ -126,6 +126,95 @@
   display: none;
 }
 
+.message-alert {
+  position: fixed;
+  z-index: 100;
+  top: 82px;
+  right: 22px;
+  display: flex;
+  width: min(390px, calc(100% - 32px));
+  overflow: hidden;
+  border: 1px solid #b8d9fb;
+  border-radius: var(--radius-md);
+  background: #fff;
+  box-shadow: 0 18px 45px rgba(13, 46, 82, 0.2);
+  animation: message-alert-in 280ms ease-out both;
+}
+
+.message-alert__link {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 42px 15px 15px;
+}
+
+.message-alert__icon {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 50%;
+  color: #fff;
+  background: linear-gradient(135deg, var(--color-primary), #3fa4ff);
+  font-size: 1.1rem;
+  box-shadow: 0 6px 14px rgba(8, 124, 240, 0.24);
+}
+
+.message-alert__link > span:last-child {
+  display: grid;
+  min-width: 0;
+  gap: 2px;
+}
+
+.message-alert strong {
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+}
+
+.message-alert small {
+  overflow: hidden;
+  color: var(--color-text-muted);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.message-alert b {
+  color: var(--color-primary-dark);
+  font-size: 0.76rem;
+}
+
+.message-alert__close {
+  position: absolute;
+  top: 7px;
+  right: 8px;
+  display: grid;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  color: var(--color-text-muted);
+  background: transparent;
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+
+.message-alert__close:hover {
+  color: var(--color-text);
+  background: var(--color-primary-light);
+}
+
+@keyframes message-alert-in {
+  from {
+    opacity: 0;
+    transform: translateY(-12px) scale(0.98);
+  }
+}
+
 @media (max-width: 920px) {
   .site-header__nav {
     align-items: flex-start;
@@ -155,5 +244,11 @@
   .site-header__brand {
     width: 150px;
     height: 44px;
+  }
+
+  .message-alert {
+    top: 12px;
+    right: 12px;
+    width: calc(100% - 24px);
   }
 }
